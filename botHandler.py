@@ -178,7 +178,7 @@ def fma_nw():
 def fma_nw2():
     global fma_omen
     current_time = time.time()
-    if current_time - fma_omen >= 10:
+    if current_time - fma_omen >= 5:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('d', 1, 0)
@@ -250,6 +250,7 @@ def shiesty3():
      if current_time - summon >= 60:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
+        pydirectinput.press("2")
         goTo(32,72,1)
         jumpDown()
         time.sleep(1)
