@@ -261,7 +261,7 @@ def shiesty3():
         time.sleep(1)
         jumpDown()
         time.sleep(1)
-        pydirectinput.press("9")
+        jumpDown()
         time.sleep(1)
         pydirectinput.press("9")
         time.sleep(1)
