@@ -9,7 +9,6 @@ import time
 import random
 from pynput.keyboard import Key, Controller
 from PIL import ImageGrab
-import pyttsx3
 import os
 from socket import *
 pydirectinput.FAILSAFE = False
@@ -86,11 +85,15 @@ def startBot():
 #    pydirectinput.press('8')
 
 def attack():
-    fma_nw()
-    fma_nw2()
+    fma_adele1()
+    fma_adele2()
+    fma_adele3()
+    fma_adele4()
+    # fma_nw()
+    # fma_nw2()
     #fma_nw3()
-    fma_nw4()
-    fma_nw5()
+    # fma_nw4()
+    # fma_nw5()
     pydirectinput.press('shift', 1, 0)
     #pydirectinput.press('a')
     time.sleep(0.6)
@@ -133,7 +136,7 @@ def goToDirection(direction, distance):
         # pydirectinput.press(JUMP_KEY, 1, 0.05)
         pydirectinput.press(JUMP_KEY, 1, 0)
         time.sleep(0.02)
-        pydirectinput.press('c', 1, 0)
+        # pydirectinput.press('c', 1, 0)
         time.sleep(0.01)
         attack()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
@@ -167,82 +170,114 @@ def jumpDown():
     pydirectinput.keyDown('down')
     pydirectinput.press('alt', 1, 0.05)
     pydirectinput.keyUp('down')
-def fma_nw():
+def fma_adele1():
     global fma_bite
     current_time = time.time()
-    if current_time - fma_bite >= 13:
+    if current_time - fma_bite >= 2:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('n', 1, 0)
+        pydirectinput.press('q', 1, 0)
         fma_bite = time.time()
-def fma_nw2():
+def fma_adele2():
     global fma_omen
     current_time = time.time()
-    if current_time - fma_omen >= 16:
+    if current_time - fma_omen >= 5:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('d', 1, 0)
+        pydirectinput.press('w', 1, 0)
         fma_omen = time.time()
-def fma_nw3():
+def fma_adele3():
+    global fma_omen
+    current_time = time.time()
+    if current_time - fma_omen >= 9:
+        sleep_duration = random.uniform(0.29, 0.39)
+        time.sleep(sleep_duration)
+        pydirectinput.press('1', 1, 0)
+        fma_omen = time.time()
+def fma_adele4():
     global fma_darkomen
     current_time = time.time()
-    if current_time - fma_darkomen >= 90:
+    if current_time - fma_darkomen >= 60:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('s', 1, 0)
+        pydirectinput.press('2', 1, 0)
         fma_darkomen = time.time()
-def fma_nw4():
-     global fma_shurrikane
-     current_time = time.time()
-     if current_time - fma_shurrikane >= 200:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        pydirectinput.press('a', 1, 0)
-        fma_shurrikane = time.time()
-def fma_nw5():
-     global fma_seren
-     current_time = time.time()
-     if current_time - fma_seren >= 250:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        pydirectinput.press('b', 1, 0)
-        fma_seren = time.time()
+# def fma_nw():
+#     global fma_bite
+#     current_time = time.time()
+#     if current_time - fma_bite >= 7:
+#         sleep_duration = random.uniform(0.29, 0.39)
+#         time.sleep(sleep_duration)
+#         pydirectinput.press('n', 1, 0)
+#         fma_bite = time.time()
+# def fma_nw2():
+#     global fma_omen
+#     current_time = time.time()
+#     if current_time - fma_omen >= 9:
+#         sleep_duration = random.uniform(0.29, 0.39)
+#         time.sleep(sleep_duration)
+#         pydirectinput.press('d', 1, 0)
+#         fma_omen = time.time()
+# def fma_nw3():
+#     global fma_darkomen
+#     current_time = time.time()
+#     if current_time - fma_darkomen >= 60:
+#         sleep_duration = random.uniform(0.29, 0.39)
+#         time.sleep(sleep_duration)
+#         pydirectinput.press('s', 1, 0)
+#         fma_darkomen = time.time()
+# def fma_nw4():
+#      global fma_shurrikane
+#      current_time = time.time()
+#      if current_time - fma_shurrikane >= 90:
+#         sleep_duration = random.uniform(0.29, 0.39)
+#         time.sleep(sleep_duration)
+#         pydirectinput.press('a', 1, 0)
+#         fma_shurrikane = time.time()
+# def fma_nw5():
+#      global fma_seren
+#      current_time = time.time()
+#      if current_time - fma_seren >= 90:
+#         sleep_duration = random.uniform(0.29, 0.39)
+#         time.sleep(sleep_duration)
+#         pydirectinput.press('b', 1, 0)
+#         fma_seren = time.time()
 
-def shiesty():
-     global summon
-     current_time = time.time()
-     if current_time - summon >= 60:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        #pydirectinput.press('9', 1, 0)
-        time.sleep(0.5)
-        jumpDown()
-        time.sleep(0.8)
-        pydirectinput.press('s')
-        time.sleep(1)
-        pydirectinput.press('up')
-        time.sleep(1)
-        pydirectinput.press('9')
-        time.sleep(1)
-        summon = time.time()
-def shiesty2():
-     global summon
-     current_time = time.time()
-     if current_time - summon >= 60:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        pydirectinput.press('9', 1, 0)
-        goTo(38,80,14)
-        goTo(152,78,6)
-        time.sleep(0.4)
-        goTo(123,67,6)
-        time.sleep(0.5)
-        pydirectinput.press('s')
-        goTo(123,67,12)
-        time.sleep(1)
-        pydirectinput.press('9')
-        time.sleep(1)
-        summon = time.time()
+# def shiesty():
+#      global summon
+#      current_time = time.time()
+#      if current_time - summon >= 60:
+#         sleep_duration = random.uniform(0.29, 0.39)
+#         time.sleep(sleep_duration)
+#         #pydirectinput.press('9', 1, 0)
+#         time.sleep(0.5)
+#         jumpDown()
+#         time.sleep(0.8)
+#         pydirectinput.press('s')
+#         time.sleep(1)
+#         pydirectinput.press('up')
+#         time.sleep(1)
+#         pydirectinput.press('9')
+#         time.sleep(1)
+#         summon = time.time()
+# def shiesty2():
+#      global summon
+#      current_time = time.time()
+#      if current_time - summon >= 60:
+#         sleep_duration = random.uniform(0.29, 0.39)
+#         time.sleep(sleep_duration)
+#         pydirectinput.press('9', 1, 0)
+#         goTo(37,67,4)
+#         goTo(154,38,6)
+#         time.sleep(0.4)
+#         goTo(122,67,6)
+#         time.sleep(0.5)
+#         pydirectinput.press('s')
+#         time.sleep(1)
+#         pydirectinput.press('left')
+#         pydirectinput.press('9')
+#         time.sleep(1)
+#         summon = time.time()
 
 def shiesty3():
      global summon
@@ -250,20 +285,17 @@ def shiesty3():
      if current_time - summon >= 60:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        goTo(32,72,1)
-        jumpDown()
+        pydirectinput.press('1', 1, 0)
+        goTo(31,61,5)
+        goTo(136,48,6)
+        time.sleep(0.4)
+        goTo(103,15,6)
+        time.sleep(0.5)
+        pydirectinput.press('2')
         time.sleep(1)
-        pydirectinput.press("9")
+        pydirectinput.press('left')
+        goTo(39,39,1)
         time.sleep(1)
-        pydirectinput.press("up")
+        pydirectinput.press('1')
         time.sleep(1)
-        pydirectinput.press("9")
-        time.sleep(1)
-        jumpDown()
-        time.sleep(1)
-        pydirectinput.press("9")
-        time.sleep(1)
-        pydirectinput.press("9")
-        time.sleep(1)
-        goTo(86,58,1)
         summon = time.time()
