@@ -158,10 +158,11 @@ def goUp(distance):
 def goDown():
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY)
+    sleep_duration = random.uniform(0.9, 1.0)
+    time.sleep(sleep_duration)
     #pydirectinput.press('d')
     pydirectinput.keyUp('down')
     #pydirectinput.press('ctrl')
-    #time.sleep(0.8)
 
 def jumpDown():
     pydirectinput.keyDown('down')
