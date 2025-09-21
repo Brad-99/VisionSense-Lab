@@ -251,13 +251,12 @@ def shiesty3():
      global summon
      current_time = time.time()
      if current_time - summon >= 60:
-        sleep_duration = random.uniform(0.95, 1.25)
+        sleep_duration = random.uniform(0.9, 1.05)
         time.sleep(sleep_duration)
         goTo(29,72,1)
         time.sleep(sleep_duration)
         pydirectinput.press("2")
         goTo(32,72,1)
-        time.sleep(sleep_duration)
         jumpDown()
         time.sleep(sleep_duration)
         pydirectinput.press("9")
@@ -270,5 +269,5 @@ def shiesty3():
         time.sleep(sleep_duration)
         goTo(132,58,1)
         pydirectinput.press("9")
-        goTo(86,58,1)
+        goTo(79,58,1)
         summon = time.time()
