@@ -258,7 +258,6 @@ def shiesty3():
         time.sleep(sleep_duration)
         jumpDown()
         goTo(32,72,1)
-        time.sleep(sleep_duration)
         pydirectinput.press("2")
         time.sleep(sleep_duration)
         jumpDown()
