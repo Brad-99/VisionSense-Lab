@@ -165,7 +165,9 @@ def goDown():
 
 def jumpDown():
     pydirectinput.keyDown('down')
-    pydirectinput.press('alt', 1, 1)
+    pydirectinput.press('alt', 1, 0.05)
+    sleep_duration = random.uniform(0.9, 1.05)
+    time.sleep(sleep_duration)
     pydirectinput.keyUp('down')
 def fma_nw():
     global fma_bite
@@ -253,9 +255,11 @@ def shiesty3():
      if current_time - summon >= 60:
         sleep_duration = random.uniform(0.9, 1.05)
         time.sleep(sleep_duration)
-        goTo(29,72,1)
+        goTo(42,72,1)
         time.sleep(sleep_duration)
         pydirectinput.press("2")
+        time.sleep(sleep_duration)
+        goTo(27,72,1)
         time.sleep(sleep_duration)
         jumpDown()
         time.sleep(sleep_duration)
