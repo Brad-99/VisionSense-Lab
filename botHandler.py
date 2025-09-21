@@ -244,13 +244,17 @@ def shiesty2():
         time.sleep(1)
         summon = time.time()
 
+#harsh winter 4
+        # goTo(29,72,1) bot left
+        # goTo(31,43,1) top left
 def shiesty3():
      global summon
      current_time = time.time()
      if current_time - summon >= 60:
         sleep_duration = random.uniform(0.95, 1.25)
         time.sleep(sleep_duration)
-        goTo(32,72,1)
+        goTo(29,72,1)
+        time.sleep(sleep_duration)
         pydirectinput.press("2")
         time.sleep(sleep_duration)
         jumpDown()
