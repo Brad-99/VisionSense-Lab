@@ -10,7 +10,7 @@ cbVariable = tk.IntVar()
 
 # This is the section of code which define the main window
 root.geometry('400x400')
-root.title('ekkos')
+root.title('puppy')
 #root.config(background='#bae4ff')
 root.resizable(False, False)
 
