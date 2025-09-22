@@ -60,7 +60,8 @@ def startBot():
             while True:
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
                     attack()
-                    shiesty3()
+                    # shiesty3()
+                    western_outskirts()
             
 
  
@@ -246,8 +247,8 @@ def shiesty2():
         pydirectinput.press('9')
         time.sleep(1)
         summon = time.time()
-
-#harsh winter 4
+9
+# harsh winter 4
         # goTo(29,72,1) bot left
         # goTo(31,43,1) top left
 def shiesty3():
@@ -273,4 +274,33 @@ def shiesty3():
         goTo(132,58,1)
         pydirectinput.press("9")
         goTo(82,58,1)
+        summon = time.time()
+
+# western_outskirts
+        # goTo(33,71,1) bot left
+        # goTo(71,71,1) mid bot
+        # goTo(106,71,1) bot right
+        # goTo(154,71,1) off the cliff
+        # goTo(89,41,1) top right
+        # goTo(54,41,1) top left(attack here)
+
+def western_outskirts():
+     global summon
+     current_time = time.time()
+     if current_time - summon >= 60:
+        sleep_duration = random.uniform(0.9, 1.05)
+        time.sleep(sleep_duration)
+        goTo(33,71,1)
+        pydirectinput.press("9")
+        time.sleep(sleep_duration)
+        goTo(71,71,1)
+        pydirectinput.press("9")
+        time.sleep(sleep_duration)
+        goTo(106,71,1)
+        pydirectinput.press("9")
+        time.sleep(sleep_duration)
+        goTo(89,41,1)
+        pydirectinput.press("2")
+        time.sleep(sleep_duration)
+        goTo(54,41,1)
         summon = time.time()
