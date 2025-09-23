@@ -61,7 +61,7 @@ def startBot():
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
                     attack()
                     # shiesty3()
-                    estern_outskirts()
+                    eastern_outskirts()
             
 
  
@@ -276,7 +276,7 @@ def shiesty3():
         goTo(82,58,1)
         summon = time.time()
 
-# estern_outskirts
+# eastern_outskirts
         # goTo(33,71,1) bot left
         # goTo(71,71,1) mid bot
         # goTo(106,71,1) bot right
@@ -284,7 +284,7 @@ def shiesty3():
         # goTo(89,41,1) top right
         # goTo(41,38,1) top left(attack here)
 
-def estern_outskirts():
+def eastern_outskirts():
      global summon
      current_time = time.time()
      if current_time - summon >= 60:
