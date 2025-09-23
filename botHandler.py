@@ -302,5 +302,5 @@ def western_outskirts():
         goTo(89,41,1)
         pydirectinput.press("2")
         time.sleep(sleep_duration)
-        goTo(54,41,1)
+        goTo(41,38,1)
         summon = time.time()
