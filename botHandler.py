@@ -282,7 +282,7 @@ def shiesty3():
         # goTo(106,71,1) bot right
         # goTo(154,71,1) off the cliff
         # goTo(89,41,1) top right
-        # goTo(41,38,1) top left(attack here)
+        # goTo(30,38,1) top left(attack here)
 
 def eastern_outskirts():
      global summon
@@ -302,5 +302,10 @@ def eastern_outskirts():
         goTo(89,41,1)
         pydirectinput.press("2")
         time.sleep(sleep_duration)
-        goTo(41,38,1)
-        summon = time.time()
+        goTo(30,38,1)
+        time.sleep(sleep_duration)
+        time.sleep(sleep_duration)
+        pydirectinput.keyDown('right')
+        time.sleep(0.4)
+        pydirectinput.keyUp('right')
+        summon = time.time() 
