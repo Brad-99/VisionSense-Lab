@@ -94,7 +94,7 @@ def attack():
     fma_nw5()
     pydirectinput.press('shift', 1, 0)
     #pydirectinput.press('a')
-    sleep_duration = random.uniform(0.9, 1.05)
+    sleep_duration = random.uniform(0.1, 0.4)
     time.sleep(sleep_duration)
 
 
@@ -301,7 +301,7 @@ def eastern_outskirts():
         goTo(106,71,1)
         pydirectinput.press("9")
         time.sleep(sleep_duration)
-        goTo(85,41,1)
+        goTo(87,41,1)
         pydirectinput.press("2")
         time.sleep(sleep_duration)
         goTo(31,38,1)
