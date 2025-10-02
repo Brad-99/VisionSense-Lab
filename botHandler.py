@@ -94,7 +94,8 @@ def attack():
     fma_nw5()
     pydirectinput.press('shift', 1, 0)
     #pydirectinput.press('a')
-    time.sleep(0.6)
+    sleep_duration = random.uniform(0.9, 1.05)
+    time.sleep(sleep_duration)
 
 
 def isInRange(targetX, targetY, playerCoords, wantedRange):
@@ -300,9 +301,7 @@ def eastern_outskirts():
         goTo(106,71,1)
         pydirectinput.press("9")
         time.sleep(sleep_duration)
-        pydirectinput.press("x")
-        time.sleep(sleep_duration)
-        goTo(84,71,1)
+        goTo(85,71,1)
         pydirectinput.press("2")
         time.sleep(sleep_duration)
         goTo(31,38,1)
