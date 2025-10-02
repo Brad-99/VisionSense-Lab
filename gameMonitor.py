@@ -7,7 +7,7 @@ import numpy
 import datetime
 import requests
 
-playerIcon = Image.open('C:/Users/rayra/OneDrive/Documents/Code/maple/pics/playerIcon.png')
+playerIcon = Image.open(r'C:\Users\rayra\Code\maple\pics\playerIcon.png')
 
 class GameMonitor:
     def __init__(self, currentHp=None, currentPlayerCoords=None):
