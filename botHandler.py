@@ -307,6 +307,6 @@ def eastern_outskirts():
         goTo(31,38,1)
         time.sleep(sleep_duration)
         pydirectinput.keyDown('right')
-        time.sleep(random.uniform(0.3, 0.4))
+        time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
         summon = time.time() 
