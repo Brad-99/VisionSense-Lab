@@ -280,9 +280,9 @@ def shiesty3():
 # eastern_outskirts
         # goTo(33,71,1) bot left
         # goTo(71,71,1) mid bot
-        # goTo(106,71,1) bot right
+        # goTo(110,71,1) bot right
         # goTo(154,71,1) off the cliff
-        # goTo(89,41,1) top right
+        # goTo(90,41,1) top right
         # goTo(105,41,1) top right(direct above bot right)
         # goTo(30,38,1) top left(attack here)
 
@@ -293,13 +293,11 @@ def eastern_outskirts():
         sleep_duration = random.uniform(0.9, 1.05)
         goTo(71,71,1)
         pydirectinput.press("9")
-        goTo(106,71,1)
+        goTo(110,71,1)
         pydirectinput.press("9")
-        goTo(89,41,1)
+        goTo(90,41,1)
         pydirectinput.press("9")
-        goTo(30,38,1)
-        time.sleep(sleep_duration)
-        goTo(40,38,1)
+        goTo(36,38,1)
         pydirectinput.press("2")
         # time.sleep(sleep_duration)
         goTo(33,71,1)
