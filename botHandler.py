@@ -297,7 +297,7 @@ def eastern_outskirts():
         pydirectinput.press("9")
         goTo(88,41,1)
         pydirectinput.press("9")
-        goTo(36,38,1)
+        goTo(39,38,1)
         pydirectinput.press("2")
         # time.sleep(sleep_duration)
         goTo(33,71,1)
