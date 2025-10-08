@@ -60,8 +60,9 @@ def startBot():
             while True:
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
                     attack()
-                    # shiesty3()
+                    # harsh_winter_4()
                     eastern_outskirts()
+                    # gcc2()
             
 
  
@@ -262,7 +263,7 @@ def shiesty2():
 # harsh winter 4
         # goTo(29,72,1) bot left
         # goTo(31,43,1) top left
-def shiesty3():
+def harsh_winter_4():
      global summon
      current_time = time.time()
      if current_time - summon >= 60:
@@ -315,3 +316,32 @@ def eastern_outskirts():
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
         summon = time.time() 
+
+# giant coral colony 2
+        # goTo(30,36,1) top left
+        # goTo(72,35,1) top mid
+        # goTo(138,33,1) top right
+        # goTo(112,53,1) mid right
+        # goTo(47,67,1) bot left (attack here)
+        
+def gcc2():
+     global summon
+     current_time = time.time()
+     if current_time - summon >= 60:
+        sleep_duration = random.uniform(0.9, 1.05)
+        goTo(30,36,1)
+        pydirectinput.press("3")
+        goTo(72,35,1)
+        pydirectinput.press("3")
+        goTo(138,33,1)
+        pydirectinput.press("3")
+        goTo(112,53,1)
+        pydirectinput.press("2")
+        # time.sleep(sleep_duration)
+        goTo(47,67,1)
+        pydirectinput.keyDown('right')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('right')
+        summon = time.time() 
+
+# def enfolding_forest_1()
