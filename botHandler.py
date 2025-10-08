@@ -61,8 +61,8 @@ def startBot():
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
                     attack()
                     # harsh_winter_4()
-                    eastern_outskirts()
-                    # gcc2()
+                    # eastern_outskirts()
+                    gcc2()
             
 
  
