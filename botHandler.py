@@ -87,13 +87,13 @@ def startBot():
 #    pydirectinput.press('8')
 
 def attack():
-    fma_nw()
-    fma_nw2()
-    #fma_nw3()
-    fma_nw4()
-    fma_nw5()
+    skills_3s()
+    skills_13s()
+    skills_60s()
+    skills_60s_2()
+    skills_120s()
+    skills_180s()
     pydirectinput.press('shift', 1, 0)
-    #pydirectinput.press('a')
     sleep_duration = random.uniform(0.1, 0.4)
     time.sleep(sleep_duration)
 
@@ -143,7 +143,7 @@ def goToDirection(direction, distance):
     else:
         holdKey(direction.lower(), 0.25)
 
-
+# Movements
 def holdKey(key, hold_time):
     startTime = time.time()
     while time.time() - startTime < hold_time:
@@ -172,42 +172,52 @@ def jumpDown():
     sleep_duration = random.uniform(0.29, 0.39)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('down')
-def fma_nw():
+
+# Skills
+def skills_3s():
+    global fma_omen
+    current_time = time.time()
+    if current_time - fma_omen >= 3:
+        sleep_duration = random.uniform(0.29, 0.39)
+        time.sleep(sleep_duration)
+        pydirectinput.press('d', 1, 0)
+        fma_omen = time.time()
+def skills_13s():
     global fma_bite
     current_time = time.time()
     if current_time - fma_bite >= 13:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('n', 1, 0)
+        pydirectinput.press('f', 1, 0)
         fma_bite = time.time()
-def fma_nw2():
-    global fma_omen
-    current_time = time.time()
-    if current_time - fma_omen >= 5:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        pydirectinput.press('d', 1, 0)
-        fma_omen = time.time()
-def fma_nw3():
+def skills_60s():
     global fma_darkomen
     current_time = time.time()
-    if current_time - fma_darkomen >= 90:
+    if current_time - fma_darkomen >= 60:
+        sleep_duration = random.uniform(0.29, 0.39)
+        time.sleep(sleep_duration)
+        pydirectinput.press('a', 1, 0)
+        fma_darkomen = time.time()
+def skills_60s_2():
+    global fma_darkomen
+    current_time = time.time()
+    if current_time - fma_darkomen >= 60:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('s', 1, 0)
         fma_darkomen = time.time()
-def fma_nw4():
+def skills_120s():
      global fma_shurrikane
      current_time = time.time()
-     if current_time - fma_shurrikane >= 200:
+     if current_time - fma_shurrikane >= 120:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('a', 1, 0)
         fma_shurrikane = time.time()
-def fma_nw5():
+def skills_180s():
      global fma_seren
      current_time = time.time()
-     if current_time - fma_seren >= 250:
+     if current_time - fma_seren >= 365:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('b', 1, 0)
@@ -219,7 +229,7 @@ def shiesty():
      if current_time - summon >= 60:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        #pydirectinput.press('9', 1, 0)
+        #pydirectinput.press('3', 1, 0)
         time.sleep(0.5)
         jumpDown()
         time.sleep(0.8)
@@ -227,7 +237,7 @@ def shiesty():
         time.sleep(1)
         pydirectinput.press('up')
         time.sleep(1)
-        pydirectinput.press('9')
+        pydirectinput.press('3')
         time.sleep(1)
         summon = time.time()
 def shiesty2():
@@ -236,7 +246,7 @@ def shiesty2():
      if current_time - summon >= 60:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('9', 1, 0)
+        pydirectinput.press('3', 1, 0)
         goTo(38,80,14)
         goTo(152,78,6)
         time.sleep(0.4)
@@ -245,7 +255,7 @@ def shiesty2():
         pydirectinput.press('s')
         goTo(123,67,12)
         time.sleep(1)
-        pydirectinput.press('9')
+        pydirectinput.press('3')
         time.sleep(1)
         summon = time.time()
 9
@@ -264,16 +274,16 @@ def shiesty3():
         time.sleep(sleep_duration)
         jumpDown()
         time.sleep(sleep_duration)
-        pydirectinput.press("9")
+        pydirectinput.press("3")
         time.sleep(sleep_duration)
         pydirectinput.press("up")
         time.sleep(sleep_duration)
-        pydirectinput.press("9")
+        pydirectinput.press("3")
         time.sleep(sleep_duration)
         jumpDown()
         time.sleep(sleep_duration)
         goTo(132,58,1)
-        pydirectinput.press("9")
+        pydirectinput.press("3")
         goTo(82,58,1)
         summon = time.time()
 
@@ -292,11 +302,11 @@ def eastern_outskirts():
      if current_time - summon >= 60:
         sleep_duration = random.uniform(0.9, 1.05)
         goTo(71,71,1)
-        pydirectinput.press("9")
+        pydirectinput.press("3")
         goTo(106,71,1)
-        pydirectinput.press("9")
+        pydirectinput.press("3")
         goTo(88,41,1)
-        pydirectinput.press("9")
+        pydirectinput.press("3")
         goTo(39,38,1)
         pydirectinput.press("2")
         # time.sleep(sleep_duration)
