@@ -197,12 +197,6 @@ def skills_60s():
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('a', 1, 0)
-        fma_darkomen = time.time()
-def skills_60s_2():
-    global fma_darkomen
-    current_time = time.time()
-    if current_time - fma_darkomen >= 60:
-        sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('s', 1, 0)
         fma_darkomen = time.time()
