@@ -91,7 +91,6 @@ def attack():
     skills_3s()
     skills_13s()
     skills_60s()
-    skills_60s_2()
     skills_120s()
     skills_180s()
     pydirectinput.press('shift', 1, 0)
