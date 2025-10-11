@@ -150,29 +150,11 @@ def holdKey(key, hold_time):
     pydirectinput.keyUp(key)
 
 def goUp(distance):
-    start_time = time.time()
-    prev_distance = distance
-    timeout = 10  # seconds
-    while True:
-        if abs(distance) < 5:
-            pydirectinput.press("alt")
-            time.sleep(1.2)
-            break
-        else:
-            pydirectinput.press('x') #rope lift
-            time.sleep(1.2)
-        # get current distance
-        if handler.gameMonitorInstance.getPlayerCoords() is not None:
-            currentPlayerLocation = handler.gameMonitorInstance.getPlayerCoords()
-            distance = currentPlayerLocation.y
-        # if no change in distance for timeout duration, break
-        if distance == prev_distance:
-            if time.time() - start_time > timeout:
-                print("goUp timeout: distance did not change for 10 seconds, aborting.")
-                break
-        else:
-            start_time = time.time()  # reset start time if distance changed
-        prev_distance = distance
+    if abs(distance) >= 5:
+        pydirectinput.press('x') #rope lift
+    else:
+        pydirectinput.press("alt")
+    time.sleep(1.2)
 
 def goDown():
     pydirectinput.keyDown('down')
@@ -311,7 +293,7 @@ def harsh_winter_4():
 def eastern_outskirts():
     global summon
     current_time = time.time()
-    timeout = 30  # 秒
+    timeout = 30  # seconds
     start_time = time.time()
     if current_time - summon >= 60:
         sleep_duration = random.uniform(0.9, 1.05)
@@ -323,10 +305,10 @@ def eastern_outskirts():
         pydirectinput.press("3")
         goTo(34,38,1)
         pydirectinput.press("2")
-        # timeout 檢查
+        # timeout check
         if time.time() - start_time > timeout:
-            print("Timeout! Moving to safe point (33,71,1).")
-        goTo(37,54,1)
+            print("Timeout! Moving to safe point (36,54,1).")
+        goTo(36,54,1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
