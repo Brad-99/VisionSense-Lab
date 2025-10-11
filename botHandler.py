@@ -89,7 +89,7 @@ def startBot():
 
 def attack():
     skills_3s()
-    skills_13s()
+    skills_20s()
     skills_60s()
     skills_120s()
     skills_180s()
@@ -182,10 +182,10 @@ def skills_3s():
         time.sleep(sleep_duration)
         pydirectinput.press('a', 1, 0)
         fma_omen = time.time()
-def skills_13s():
+def skills_20s():
     global fma_bite
     current_time = time.time()
-    if current_time - fma_bite >= 13:
+    if current_time - fma_bite >= 20:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('s', 1, 0)
