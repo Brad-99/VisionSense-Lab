@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import itertools
 
-# Import your handler
+# Import your handler (keep original logic)
 import handler
 
 # --- Theme Colors (ChatGPT Dark Mode style) ---
@@ -44,10 +44,21 @@ root.grid_columnconfigure(1, weight=1)
 # --- Initialize Frame ---
 ttk.Label(initFrame, text="Initialize Settings", font=("Segoe UI", 11, "bold")).grid(row=0, column=0, columnspan=2, pady=(0, 15))
 
-loadButton = tk.Button(initFrame, text="Load Entities", bg=ACCENT_GREEN, fg="white",
-                       activebackground="#13b58d", font=("Segoe UI", 10, "bold"),
-                       relief="flat", padx=12, pady=6, borderwidth=0, highlightthickness=0,
-                       command=lambda: start_loading_animation())
+# <<< RESTORED: Load Entities now calls handler.initButtonClick exactly like original >>>
+loadButton = tk.Button(
+    initFrame,
+    text="Load Entities",
+    bg=ACCENT_GREEN,
+    fg="white",
+    activebackground="#13b58d",
+    font=("Segoe UI", 10, "bold"),
+    relief="flat",
+    padx=12,
+    pady=6,
+    borderwidth=0,
+    highlightthickness=0,
+    command=handler.initButtonClick   # <-- 恢復到原始邏輯
+)
 loadButton.grid(row=1, column=0, columnspan=2, pady=5)
 
 ttk.Label(initFrame, text="Mini map position:", foreground=FG_SUBTEXT).grid(row=2, column=0, sticky="w", pady=(20, 0))
@@ -61,21 +72,27 @@ coordinatesLabel = ttk.Label(liveFrame, text="(10,10)")
 coordinatesLabel.grid(row=1, column=1, sticky="e")
 
 # --- Bottom Section ---
-startButton = tk.Button(bottomFrame, text="Start Farming",
-                        bg=ACCENT_GREEN, fg="white",
-                        activebackground="#13b58d",
-                        font=("Segoe UI", 11, "bold"),
-                        relief="flat", padx=18, pady=8,
-                        borderwidth=0, highlightthickness=0,
-                        command=lambda: handler.startButtonClick())
-
+startButton = tk.Button(
+    bottomFrame,
+    text="Start Farming",
+    bg=ACCENT_GREEN,
+    fg="white",
+    activebackground="#13b58d",
+    font=("Segoe UI", 11, "bold"),
+    relief="flat",
+    padx=18,
+    pady=8,
+    borderwidth=0,
+    highlightthickness=0,
+    command=handler.startButtonClick  # keep original start logic
+)
 startButton.grid(row=0, column=0, pady=10)
 
-# Hover effect for buttons
+# Hover effect for Start/Stop button
 def on_enter(e):
     e.widget.config(bg="#13b58d")
 def on_leave(e):
-    # reset color based on current state
+    # reset color based on current state label
     if botStatusLabel["text"] == "running..":
         e.widget.config(bg=ACCENT_RED)
     else:
@@ -88,34 +105,28 @@ ttk.Label(bottomFrame, text="Status:", foreground=FG_SUBTEXT).grid(row=1, column
 botStatusLabel = ttk.Label(bottomFrame, text="not running", foreground=ACCENT_RED)
 botStatusLabel.grid(row=1, column=0, padx=60, sticky="w")
 
-# --- Loading animation setup ---
+# --- (Optional) Loading animation (kept but NOT auto-triggered by Load button) ---
 loading = False
 spinner_cycle = itertools.cycle(["|", "/", "-", "\\"])
 spinner_label = ttk.Label(initFrame, text="", foreground=ACCENT_GREEN, font=("Consolas", 14, "bold"))
 spinner_label.grid(row=3, column=0, columnspan=2, pady=(20, 0))
 
 def start_loading_animation():
-    """Simulates loading process"""
     global loading
     loading = True
-    spinner_label.config(text="Loading...")
     animate_spinner()
-    root.after(2000, stop_loading_animation)  # simulate 2 seconds load time
 
 def animate_spinner():
-    """Updates spinner frame"""
     if loading:
         spinner_label.config(text=next(spinner_cycle))
         root.after(100, animate_spinner)
 
 def stop_loading_animation():
-    """Stops spinner"""
     global loading
     loading = False
-    spinner_label.config(text="Done ✅", foreground=ACCENT_GREEN)
-    miniMapLabel.config(text="Done", foreground=ACCENT_GREEN)
+    spinner_label.config(text="")
 
-# --- Update functions ---
+# --- Update functions (for handler to call) ---
 def updateMiniMapLabel(error=None):
     if error is not None:
         miniMapLabel.config(foreground=ACCENT_RED, text=error)
@@ -133,5 +144,6 @@ def updateBotStatus(isRunning):
         botStatusLabel.config(text="not running", foreground=ACCENT_RED)
         startButton.config(text="Start Farming", bg=ACCENT_GREEN, activebackground="#13b58d")
 
+# make root palette consistent
 root.tk_setPalette(background=BG_MAIN, foreground=FG_TEXT)
 root.mainloop()
