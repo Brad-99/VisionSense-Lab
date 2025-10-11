@@ -301,12 +301,12 @@ def harsh_winter_4():
 
 # eastern_outskirts
         # goTo(33,71,1) bot left
-        # goTo(71,71,1) mid bot
+        # goTo(75,71,1) mid bot
         # goTo(110,71,1) bot right
-        # goTo(154,71,1) off the cliff
-        # goTo(90,41,1) top right
-        # goTo(105,41,1) top right(direct above bot right)
-        # goTo(30,38,1) top left(attack here)
+        # goTo(88,41,1) top right
+        # goTo(34,38,1) top left
+        # goTo(37,54,1) mid left(attack here)
+
 
 def eastern_outskirts():
     global summon
@@ -315,18 +315,18 @@ def eastern_outskirts():
     start_time = time.time()
     if current_time - summon >= 60:
         sleep_duration = random.uniform(0.9, 1.05)
-        goTo(71,71,1)
+        goTo(75,71,1)
         pydirectinput.press("3")
-        goTo(106,71,1)
+        goTo(110,71,1)
         pydirectinput.press("3")
         goTo(88,41,1)
         pydirectinput.press("3")
-        goTo(39,38,1)
+        goTo(34,38,1)
         pydirectinput.press("2")
         # timeout 檢查
         if time.time() - start_time > timeout:
             print("Timeout! Moving to safe point (33,71,1).")
-        goTo(33,71,1)
+        goTo(37,54,1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
