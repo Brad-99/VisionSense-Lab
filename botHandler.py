@@ -89,10 +89,10 @@ def startBot():
 
 def attack():
     skills_3s()
-    skills_20s()
-    skills_60s()
-    skills_120s()
     skills_180s()
+    skills_120s()
+    skills_60s()
+    skills_20s()
     pydirectinput.press('shift', 1, 0)
     sleep_duration = random.uniform(0.1, 0.4)
     time.sleep(sleep_duration)
