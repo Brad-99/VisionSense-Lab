@@ -298,6 +298,7 @@ def eastern_outskirts():
     start_time = time.time()
     if current_time - summon >= 60:
         sleep_duration = random.uniform(0.9, 1.05)
+        goTo(36,71,1)
         goTo(75,71,1)
         pydirectinput.press("3")
         goTo(110,71,1)
