@@ -1,80 +1,95 @@
 import tkinter as tk
-
-# Import the handler
+from tkinter import ttk
 import handler
 
+# Initialize main window
 root = tk.Tk()
-
-# This is the declaration of the variable associated with the checkbox
-cbVariable = tk.IntVar()
-
-# Set black background and white foreground for the whole window
-root.geometry('400x400')
-root.title('puppy')
-root.config(background='#000000')
+root.geometry('450x500')
+root.title('🐾Puppy Controller')
+root.config(background='#1e1e2e')
 root.resizable(False, False)
 
-# create all of the main containers
-initFrame = tk.Frame(root, width=200, height=200, borderwidth=2, relief="groove", bg='#000000')
-liveFrame = tk.Frame(root, width=155, height=200, borderwidth=2, relief="groove", bg='#000000')
+# Define styles
+style = ttk.Style()
+style.theme_use('clam')
 
-# layout all of the main containers
-root.grid_rowconfigure(0, weight=0)
+# Configure custom styles
+style.configure('TFrame', background='#1e1e2e')
+style.configure('TLabel', background='#1e1e2e', foreground='#ffffff', font=('Arial', 10))
+style.configure('Header.TLabel', font=('Arial', 12, 'bold'))
+style.configure('Status.TLabel', font=('Arial', 10, 'bold'))
+style.configure('TButton', 
+                background='#3b3b4f', 
+                foreground='#ffffff', 
+                font=('Arial', 10),
+                padding=10,
+                bordercolor='#454567')
+style.map('TButton', 
+         background=[('active', '#454567')],
+         foreground=[('active', '#e0e0e0')])
+
+# Variables
+cbVariable = tk.IntVar()
+
+# Create main containers
+main_frame = ttk.Frame(root, padding=20)
+main_frame.grid(row=0, column=0, sticky="nsew")
+root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
 
-initFrame.grid(row=0, column=0, sticky="W", padx=15, pady=15)
-liveFrame.grid(row=0, column=1, sticky="E", padx=15, pady=15)
+# Create sub-frames
+initFrame = ttk.Frame(main_frame, padding=15, relief="flat", style='TFrame')
+liveFrame = ttk.Frame(main_frame, padding=15, relief="flat", style='TFrame')
+optionsFrame = ttk.Frame(main_frame, padding=15, style='TFrame')
 
-# Init Frame
-tk.Label(root, text='Initialize settings', fg='#FFFFFF', bg='#000000', font=('arial', 9, 'bold')) \
-    .grid(row=0, column=0, sticky="N", pady=20)
-tk.Button(root, text='Load Entities', bg='#222222', fg='#FFFFFF', font=('arial', 9, 'normal'),
-          command=handler.initButtonClick).grid(row=0, column=0, sticky="S", pady=40)
-tk.Label(root, text='Mini map position:', fg='#FFFFFF', bg='#000000', font=('arial', 9, 'normal')).grid(row=0, column=0, sticky="NW",
-                                                                                          padx=25, pady=85)
-miniMapLabel = tk.Label(root, text='Waiting', fg='#f0ae13', bg='#000000', font=('arial', 9, 'normal'))
-miniMapLabel.grid(row=0, column=0, sticky="NE", padx=35, pady=85)
+# Layout sub-frames
+initFrame.grid(row=0, column=0, padx=(0,10), pady=10, sticky="nsew")
+liveFrame.grid(row=0, column=1, padx=(10,0), pady=10, sticky="nsew")
+optionsFrame.grid(row=1, column=0, columnspan=2, pady=(20,0), sticky="nsew")
 
-# Live Frame
+# Init Frame Widgets
+ttk.Label(initFrame, text='Initialize Settings', style='Header.TLabel').pack(anchor='n', pady=(0,20))
+ttk.Button(initFrame, text='Load Entities', command=handler.initButtonClick).pack(anchor='center', pady=10)
+ttk.Label(initFrame, text='Mini Map Position:').pack(anchor='w', pady=(20,5))
+miniMapLabel = ttk.Label(initFrame, text='Waiting', foreground='#f0ae13')
+miniMapLabel.pack(anchor='e')
 
-tk.Label(root, text='Live information', fg='#FFFFFF', bg='#000000', font=('arial', 9, 'bold')).grid(row=0, column=1, sticky="N",
-                                                                                      pady=20)
+# Live Frame Widgets
+ttk.Label(liveFrame, text='Live Information', style='Header.TLabel').pack(anchor='n', pady=(0,20))
+ttk.Label(liveFrame, text='Coordinates:').pack(anchor='w', pady=(20,5))
+coordinatesLabel = ttk.Label(liveFrame, text='(10,10)')
+coordinatesLabel.pack(anchor='e')
 
-tk.Label(root, text='Coordinates:', fg='#FFFFFF', bg='#000000', font=('arial', 9, 'normal')).grid(row=0, column=1, sticky="NW",
-                                                                                    padx=25, pady=85)
-coordinatesLabel = tk.Label(root, text='(10,10)', fg='#FFFFFF', bg='#000000', font=('arial', 9, 'normal'))
-coordinatesLabel.grid(row=0, column=1, sticky="NE", padx=35, pady=85)
+# Options Frame Widgets
+startButton = ttk.Button(optionsFrame, text='Start', command=handler.startButtonClick)
+startButton.pack(anchor='center', pady=10)
+status_frame = ttk.Frame(optionsFrame)
+status_frame.pack(anchor='sw', pady=10)
+ttk.Label(status_frame, text='Status:').pack(side='left')
+botStatusLabel = ttk.Label(status_frame, text='not running', foreground='#ff0000', style='Status.TLabel')
+botStatusLabel.pack(side='left', padx=10)
 
-# Options Frame
-
-# Start Section
-startButton = tk.Button(root, text='Start Botting', bg='#222222', fg='#FFFFFF', font=('arial', 12, 'normal'),
-                        command=handler.startButtonClick)
-startButton.grid(row=4, columnspan=2, sticky="S", pady=10)
-
-tk.Label(root, text='Status:', fg='#FFFFFF', bg='#000000', font=('arial', 10, 'normal')).grid(row=5, column=0, sticky="SW", padx=10)
-botStatusLabel = tk.Label(root, text='not running', fg='#FF0000', bg='#000000', font=('arial', 10, 'normal'))
-botStatusLabel.grid(row=5, column=0, sticky="SW", padx=55)
-
-
+# Update functions
 def updateMiniMapLabel(error=None):
     if error is not None:
-        miniMapLabel['fg'] = '#c70c0c'
+        miniMapLabel['foreground'] = '#c70c0c'
         miniMapLabel['text'] = error
     else:
         miniMapLabel['text'] = 'Done'
-        miniMapLabel['fg'] = '#0aad20'
+        miniMapLabel['foreground'] = '#0aad20'
 
 def updateCurrentCoordinate(point):
-    coordinatesLabel['text'] = '({0}, {1})'.format(point.x, point.y)
-
+    coordinatesLabel['text'] = f'({point.x}, {point.y})'
 
 def updateBotStatus(isRunning):
     if isRunning:
         botStatusLabel['text'] = 'running..'
-        botStatusLabel['fg'] = '#0aad20'
-        startButton['text'] = 'Stop Farming'
+        botStatusLabel['foreground'] = '#0aad20'
+        startButton['text'] = 'Stop'
     else:
         botStatusLabel['text'] = 'not running'
-        botStatusLabel['fg'] = '#ff0000'
-        startButton['text'] = 'Start Botting'
+        botStatusLabel['foreground'] = '#ff0000'
+        startButton['text'] = 'Start'
+
+# Start main loop
+root.mainloop()
