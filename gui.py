@@ -77,4 +77,4 @@ def updateBotStatus(isRunning):
     else:
         botStatusLabel['text'] = 'not running'
         botStatusLabel['fg'] = '#ff0000'
-        startButton['text'] = 'Start
+        startButton['text'] = 'Start Farming'
