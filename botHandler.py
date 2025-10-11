@@ -180,7 +180,7 @@ def skills_3s():
     if current_time - fma_omen >= 3:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('d', 1, 0)
+        pydirectinput.press('a', 1, 0)
         fma_omen = time.time()
 def skills_13s():
     global fma_bite
@@ -188,7 +188,7 @@ def skills_13s():
     if current_time - fma_bite >= 13:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('f', 1, 0)
+        pydirectinput.press('s', 1, 0)
         fma_bite = time.time()
 def skills_60s():
     global fma_darkomen
@@ -196,7 +196,7 @@ def skills_60s():
     if current_time - fma_darkomen >= 60:
         sleep_duration = random.uniform(1.0, 1.5)
         time.sleep(sleep_duration)
-        pydirectinput.press('s', 1, 0)
+        pydirectinput.press('d', 1, 0)
         time.sleep(sleep_duration)
         time.sleep(sleep_duration)
         pydirectinput.press('f', 1, 0)
@@ -207,7 +207,7 @@ def skills_120s():
      if current_time - fma_shurrikane >= 120:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('a', 1, 0)
+        pydirectinput.press('g', 1, 0)
         fma_shurrikane = time.time()
 def skills_180s():
      global fma_seren
