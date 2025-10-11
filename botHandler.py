@@ -150,11 +150,29 @@ def holdKey(key, hold_time):
     pydirectinput.keyUp(key)
 
 def goUp(distance):
-    if abs(distance) >= 5:
-        pydirectinput.press('x') #rope lift
-    else:
-        pydirectinput.press("alt")
-    time.sleep(1.2)
+    start_time = time.time()
+    prev_distance = distance
+    timeout = 10  # seconds
+    while True:
+        if abs(distance) < 5:
+            pydirectinput.press("alt")
+            time.sleep(1.2)
+            break
+        else:
+            pydirectinput.press('x') #rope lift
+            time.sleep(1.2)
+        # get current distance
+        if handler.gameMonitorInstance.getPlayerCoords() is not None:
+            currentPlayerLocation = handler.gameMonitorInstance.getPlayerCoords()
+            distance = currentPlayerLocation.y
+        # if no change in distance for timeout duration, break
+        if distance == prev_distance:
+            if time.time() - start_time > timeout:
+                print("goUp timeout: distance did not change for 10 seconds, aborting.")
+                break
+        else:
+            start_time = time.time()  # reset start time if distance changed
+        prev_distance = distance
 
 def goDown():
     pydirectinput.keyDown('down')
