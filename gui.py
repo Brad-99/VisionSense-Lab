@@ -15,32 +15,31 @@ style.theme_use('clam')
 
 # 主題配色
 BG_MAIN = '#1E1E1E'
-BG_CARD = '#252525' # 將卡片背景色改深一點以增加區隔
+BG_CARD = '#252525'
 FG_TEXT = '#E0E0E0'
 FG_SUB = '#AAAAAA'
 ACCENT = '#0AAD20'
 ERROR = '#C0392B'
-BORDER = '#2B2B2B'
-BTN_BG = '#2F2F2F'
-BTN_ACTIVE = '#3D3D3D'
+# BTN_BG 和 BTN_ACTIVE 保持不變
 
 # 通用樣式
 style.configure('TFrame', background=BG_MAIN)
-# 將卡片邊框拿掉，讓它看起來更像一個區塊
 style.configure('Card.TFrame', background=BG_CARD, relief='flat', borderwidth=0)
 style.configure('TLabel', background=BG_CARD, foreground=FG_TEXT, font=('Segoe UI', 11))
 style.configure('Header.TLabel', font=('Segoe UI Semibold', 12, 'bold'), foreground='#F5F5F5', background=BG_CARD)
-# Status.TLabel 移除背景色，讓它與其父框架的背景融合
+
+# 🚀 修正 1: 確保 Status.TLabel 字體足夠且一致
 style.configure('Status.TLabel', font=('Consolas', 11, 'bold'), background=BG_CARD)
 
+# 按鈕樣式保持不變
 style.configure('TButton',
-                background=BTN_BG,
+                background='#2F2F2F',
                 foreground='#FFFFFF',
                 font=('Segoe UI', 11, 'bold'),
                 padding=(8, 8),
                 borderwidth=0)
 style.map('TButton',
-          background=[('active', BTN_ACTIVE)],
+          background=[('active', '#3D3D3D')],
           foreground=[('active', '#FFFFFF')])
 
 style.configure('Running.TButton',
@@ -75,28 +74,38 @@ ttk.Button(initFrame, text='Load Entities', command=handler.initButtonClick, wid
 
 ttk.Separator(initFrame, orient='horizontal').pack(fill='x', pady=15)
 
-# **修正 Init 區塊排版**
-# 創建一個 Frame 來容納 'Mini Map Position:' 和 狀態 Label
+# **修正 Init 區塊排版 (使用 grid 解決文字切邊)**
 mini_map_frame = ttk.Frame(initFrame, style='Card.TFrame')
-mini_map_frame.pack(fill='x', pady=(5, 5))
+mini_map_frame.pack(fill='x', pady=(5, 5), padx=5) # 增加父框架的水平內部間距
 
-# 將標題和狀態放在同一行，使用 pack(side='left') 和 pack(side='right')
-ttk.Label(mini_map_frame, text='Mini Map Position:', foreground=FG_SUB, background=BG_CARD).pack(side='left')
-miniStatusLabel = ttk.Label(mini_map_frame, text='Waiting', foreground='#F0AE13', background=BG_CARD, font=('Consolas', 10))
-miniStatusLabel.pack(side='right')
+# 設定兩欄排版
+mini_map_frame.grid_columnconfigure(0, weight=1)  # 讓 Mini Map Position: 佔用剩餘空間
+mini_map_frame.grid_columnconfigure(1, weight=0)  # 狀態標籤不需要拉伸
+
+# 標題 (左對齊)
+ttk.Label(mini_map_frame, text='Mini Map Position:', foreground=FG_SUB, background=BG_CARD).grid(row=0, column=0, sticky='w')
+
+# 狀態 (右對齊)
+# 🚀 修正 2: 保持 miniStatusLabel 與 Status.TLabel 樣式一致
+miniStatusLabel = ttk.Label(mini_map_frame, text='Waiting', foreground='#F0AE13', style='Status.TLabel')
+miniStatusLabel.grid(row=0, column=1, sticky='e')
 
 
 # --- Live Info 區塊 ---
 ttk.Label(liveFrame, text='📡 Live Info', style='Header.TLabel').pack(anchor='center', pady=(0, 20))
 
-# **Live Info 區塊排版**
-# 創建一個 Frame 來容納 'Coordinates:' 和 實際座標 Label
+# Live Info 區塊排版 (使用 grid 確保間距和對齊)
 coordinate_frame = ttk.Frame(liveFrame, style='Card.TFrame')
-coordinate_frame.pack(fill='x', pady=(5, 5))
+coordinate_frame.pack(fill='x', pady=(5, 5), padx=5) # 增加父框架的水平內部間距
 
-ttk.Label(coordinate_frame, text='Coordinates:', foreground=FG_SUB, background=BG_CARD).pack(side='left')
-coordinatesLabel = ttk.Label(coordinate_frame, text='(10,10)', font=('Consolas', 10), background=BG_CARD, foreground='#00BFFF')
-coordinatesLabel.pack(side='right')
+coordinate_frame.grid_columnconfigure(0, weight=1)
+coordinate_frame.grid_columnconfigure(1, weight=0)
+
+ttk.Label(coordinate_frame, text='Coordinates:', foreground=FG_SUB, background=BG_CARD).grid(row=0, column=0, sticky='w')
+
+# 座標標籤
+coordinatesLabel = ttk.Label(coordinate_frame, text='(10,10)', style='Status.TLabel', foreground='#00BFFF')
+coordinatesLabel.grid(row=0, column=1, sticky='e')
 
 
 # --- 控制區 ---
@@ -110,10 +119,11 @@ ttk.Separator(optionsFrame, orient='horizontal').pack(fill='x', pady=10)
 # Status 區塊
 status_frame = ttk.Frame(optionsFrame, style='Card.TFrame')
 status_frame.pack(anchor='center', pady=10)
-# 確保 botStatusLabel 的背景色與父框架一致
+
+# 🚀 修正 3: 使用 pack 且不使用硬編碼 padx，讓間距更自然
 ttk.Label(status_frame, text='Status:', foreground=FG_SUB, background=BG_CARD).pack(side='left')
-botStatusLabel = ttk.Label(status_frame, text='not running', foreground=ERROR, background=BG_CARD, style='Status.TLabel')
-botStatusLabel.pack(side='left', padx=10)
+botStatusLabel = ttk.Label(status_frame, text='not running', foreground=ERROR, style='Status.TLabel')
+botStatusLabel.pack(side='left') # 移除 padx=10，讓字體自然間隔
 
 
 # --- 更新函式 ---
@@ -129,8 +139,9 @@ def updateMiniMapLabel(status=None, error=None):
         miniStatusLabel['foreground'] = ERROR
         return
 
-    # Normalize status
+    # Normalize status and set the state
     if status is True or (isinstance(status, str) and status.lower() == 'done'):
+        # 確保 'Done' 的文字不會被切邊，且顏色正確
         miniStatusLabel['text'] = 'Done'
         miniStatusLabel['foreground'] = ACCENT
     else:
