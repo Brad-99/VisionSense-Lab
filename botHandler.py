@@ -199,7 +199,7 @@ def skills_60s():
         pydirectinput.press('s', 1, 0)
         time.sleep(sleep_duration)
         time.sleep(sleep_duration)
-        pydirectinput.press('a', 1, 0)
+        pydirectinput.press('f', 1, 0)
         fma_darkomen = time.time()
 def skills_120s():
      global fma_shurrikane
