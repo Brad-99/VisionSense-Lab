@@ -211,9 +211,10 @@ def skills_60s():
     global fma_darkomen
     current_time = time.time()
     if current_time - fma_darkomen >= 60:
-        sleep_duration = random.uniform(0.29, 0.39)
+        sleep_duration = random.uniform(1.0, 1.5)
         time.sleep(sleep_duration)
         pydirectinput.press('s', 1, 0)
+        time.sleep(sleep_duration)
         time.sleep(sleep_duration)
         pydirectinput.press('a', 1, 0)
         fma_darkomen = time.time()
@@ -269,7 +270,7 @@ def shiesty2():
         pydirectinput.press('3')
         time.sleep(1)
         summon = time.time()
-9
+
 # harsh winter 4
         # goTo(29,72,1) bot left
         # goTo(31,43,1) top left
@@ -308,9 +309,11 @@ def harsh_winter_4():
         # goTo(30,38,1) top left(attack here)
 
 def eastern_outskirts():
-     global summon
-     current_time = time.time()
-     if current_time - summon >= 60:
+    global summon
+    current_time = time.time()
+    timeout = 30  # 秒
+    start_time = time.time()
+    if current_time - summon >= 60:
         sleep_duration = random.uniform(0.9, 1.05)
         goTo(71,71,1)
         pydirectinput.press("3")
@@ -320,12 +323,14 @@ def eastern_outskirts():
         pydirectinput.press("3")
         goTo(39,38,1)
         pydirectinput.press("2")
-        # time.sleep(sleep_duration)
+        # timeout 檢查
+        if time.time() - start_time > timeout:
+            print("Timeout! Moving to safe point (33,71,1).")
         goTo(33,71,1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
-        summon = time.time() 
+        summon = time.time()
 
 # giant coral colony 2
         # goTo(30,36,1) top left
