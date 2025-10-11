@@ -134,6 +134,7 @@ def goToDirection(direction, distance):
         pydirectinput.keyDown(direction.lower())
         # pydirectinput.press(JUMP_KEY, 1, 0.05)
         pydirectinput.press(JUMP_KEY, 1, 0)
+        time.sleep(0.1)
         pydirectinput.press(JUMP_KEY, 1, 0)
         time.sleep(0.01)
         attack()
