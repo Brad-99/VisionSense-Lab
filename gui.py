@@ -75,29 +75,21 @@ ttk.Button(initFrame, text='Load Entities', command=handler.initButtonClick, wid
 
 ttk.Separator(initFrame, orient='horizontal').pack(fill='x', pady=15)
 
-# **修正 1：Mini Map Position 區塊排版**
+# **修正 Init 區塊排版**
 # 創建一個 Frame 來容納 'Mini Map Position:' 和 狀態 Label
 mini_map_frame = ttk.Frame(initFrame, style='Card.TFrame')
 mini_map_frame.pack(fill='x', pady=(5, 5))
 
-# Title on first line
-ttk.Label(mini_map_frame, text='Mini Map:', foreground=FG_SUB, background=BG_CARD).pack(anchor='w')
+# 將標題和狀態放在同一行，使用 pack(side='left') 和 pack(side='right')
+ttk.Label(mini_map_frame, text='Mini Map Position:', foreground=FG_SUB, background=BG_CARD).pack(side='left')
+miniStatusLabel = ttk.Label(mini_map_frame, text='Waiting', foreground='#F0AE13', background=BG_CARD, font=('Consolas', 10))
+miniStatusLabel.pack(side='right')
 
-# Status row on second line: "Waiting | Done" where the active state is highlighted
-mini_status_row = ttk.Frame(mini_map_frame, style='Card.TFrame', padding=(0,4))
-mini_status_row.pack(fill='x')
-
-# Use grid inside the status row so the status label can align right without being clipped.
-mini_status_row.grid_columnconfigure(0, weight=1)
-mini_status_row.grid_columnconfigure(1, weight=0)
-miniStatusLabel = ttk.Label(mini_status_row, text='Waiting', foreground='#F0AE13', background=BG_CARD, font=('Consolas', 10))
-# place on the right with increased vertical padding to avoid clipping
-miniStatusLabel.grid(row=0, column=1, sticky='e', padx=(0,6), pady=6)
 
 # --- Live Info 區塊 ---
 ttk.Label(liveFrame, text='📡 Live Info', style='Header.TLabel').pack(anchor='center', pady=(0, 20))
 
-# **修正 2：Live Info 區塊排版 (與 Mini Map 區塊保持一致)**
+# **Live Info 區塊排版**
 # 創建一個 Frame 來容納 'Coordinates:' 和 實際座標 Label
 coordinate_frame = ttk.Frame(liveFrame, style='Card.TFrame')
 coordinate_frame.pack(fill='x', pady=(5, 5))
@@ -115,12 +107,10 @@ startButton.pack(anchor='center', pady=(5, 20), ipadx=30, ipady=12)
 
 ttk.Separator(optionsFrame, orient='horizontal').pack(fill='x', pady=10)
 
-# **修正 3：移除 botStatusLabel 的「格子」框線**
-# Status Label 的父框架 style 還是 Card.TFrame (BG_CARD)
-# 確保 botStatusLabel 的背景色與父框架一致，這樣就不會有邊框感
+# Status 區塊
 status_frame = ttk.Frame(optionsFrame, style='Card.TFrame')
 status_frame.pack(anchor='center', pady=10)
-# 將這兩個 Label 的 background 都設為 BG_CARD (optionsFrame/status_frame 的背景色)
+# 確保 botStatusLabel 的背景色與父框架一致
 ttk.Label(status_frame, text='Status:', foreground=FG_SUB, background=BG_CARD).pack(side='left')
 botStatusLabel = ttk.Label(status_frame, text='not running', foreground=ERROR, background=BG_CARD, style='Status.TLabel')
 botStatusLabel.pack(side='left', padx=10)
