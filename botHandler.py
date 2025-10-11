@@ -22,11 +22,11 @@ JUMP_KEY = 'alt'
 
 BUFF_TIME = 33 * 1  # Seconds
 LOOP_COUNT = 1
-fma_bite=time.time()
-fma_omen=time.time()
-fma_darkomen=time.time()
-fma_shurrikane=time.time()
-fma_seren=time.time()
+skill_3s=time.time()
+skill_20s=time.time()
+skill_60s=time.time()
+skill_120s=time.time()
+skill_180s=time.time()
 summon=time.time()
 
 def startBot():
@@ -175,48 +175,48 @@ def jumpDown():
 
 # Skills
 def skills_3s():
-    global fma_omen
+    global skill_3s
     current_time = time.time()
-    if current_time - fma_omen >= 3:
+    if current_time - skill_3s >= 3:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('a', 1, 0)
-        fma_omen = time.time()
+        skill_3s = time.time()
 def skills_20s():
-    global fma_bite
+    global skill_20s
     current_time = time.time()
-    if current_time - fma_bite >= 20:
+    if current_time - skill_20s >= 20:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('s', 1, 0)
-        fma_bite = time.time()
+        skill_20s = time.time()
 def skills_60s():
-    global fma_darkomen
+    global skill_60s
     current_time = time.time()
-    if current_time - fma_darkomen >= 60:
+    if current_time - skill_60s >= 60:
         sleep_duration = random.uniform(1.0, 1.5)
         time.sleep(sleep_duration)
         pydirectinput.press('d', 1, 0)
         time.sleep(sleep_duration)
         time.sleep(sleep_duration)
         pydirectinput.press('f', 1, 0)
-        fma_darkomen = time.time()
+        skill_60s = time.time()
 def skills_120s():
-     global fma_shurrikane
+     global skill_120s
      current_time = time.time()
-     if current_time - fma_shurrikane >= 120:
+     if current_time - skill_120s >= 120:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('g', 1, 0)
-        fma_shurrikane = time.time()
+        skill_120s = time.time()
 def skills_180s():
-     global fma_seren
+     global skill_180s
      current_time = time.time()
-     if current_time - fma_seren >= 365:
+     if current_time - skill_180s >= 365:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('b', 1, 0)
-        fma_seren = time.time()
+        skill_180s = time.time()
 
 def shiesty():
      global summon
