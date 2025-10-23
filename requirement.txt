@@ -1,0 +1,7 @@
+pynput
+pyautogui
+opencv-python
+pywin32
+mss
+requests
+pydirectinput
