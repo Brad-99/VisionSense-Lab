@@ -59,6 +59,10 @@ def attack():
     sleep_duration = random.uniform(0.1, 0.4)
     time.sleep(sleep_duration)
 
+def attack_while_moving():
+    pydirectinput.press('shift', 1, 0)
+    sleep_duration = random.uniform(0.1, 0.4)
+    time.sleep(sleep_duration)
 
 def isInRange(targetX, targetY, playerCoords, wantedRange):
     xRange = abs(targetX - playerCoords.x)
@@ -98,6 +102,7 @@ def goToDirection(direction, distance):
         pydirectinput.press(JUMP_KEY, 1, 0)
         pydirectinput.press('c', 1, 0)
         time.sleep(0.01)
+        attack_while_moving()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
         pydirectinput.keyUp(direction.lower())
     else:
@@ -335,11 +340,10 @@ def bottom_deck_3():
         goTo(50,49,1)
         pydirectinput.press("3")
         goTo(96,49,1)
-        time.sleep(sleep_duration)
         pydirectinput.press("3")
-        goTo(143,51,1)
+        goTo(140,51,1)
         pydirectinput.press("2")
-        goTo(155,78,1)
+        goTo(145,78,1)
         goTo(118,78,1)
         # timeout check
         if time.time() - start_time > timeout:
