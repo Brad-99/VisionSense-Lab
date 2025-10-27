@@ -121,9 +121,9 @@ def goUp(distance):
         pydirectinput.keyUp('up')
     if abs(distance) >= 15:
         pydirectinput.press('x') #rope lift
+        time.sleep(1.2)
     else:
         pydirectinput.press("alt")
-    # time.sleep(1.2)
 
 def goDown():
     pydirectinput.keyDown('down')
