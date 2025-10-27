@@ -36,23 +36,15 @@ def startBot():
     LOOP_COUNT = 1
 
     time.sleep(3)
-    bottom_deck_3()
+    bottom_deck_3()  # 立即執行一次 bottom_deck_3()
+
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
-
-            ignore_attack = False
-            while True:
-                if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
-                    ignore_attack = True
-                    bottom_deck_3()
-                    # harsh_winter_4()
-                    # eastern_outskirts()
-                    # gcc2()
-                    ignore_attack = False
-                    if not ignore_attack:
-                        attack()
+            # eastern_outskirts()
+            bottom_deck_3()
+            attack()
 
 def attack():
     skills_3s()
@@ -342,6 +334,7 @@ def bottom_deck_3():
         pydirectinput.press("3")
         goTo(90,49,1)
         pydirectinput.press("2")
+        goTo(134,51,1)
         goTo(150,64,1)
         # timeout check
         if time.time() - start_time > timeout:
