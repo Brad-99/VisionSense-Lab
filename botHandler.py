@@ -45,35 +45,13 @@ def startBot():
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
                     if not ignore_attack:
                         attack()
+                        
+                    ignore_attack = True
+                    bottom_deck_3()
                     # harsh_winter_4()
                     # eastern_outskirts()
                     # gcc2()
-                    ignore_attack = True
-                    bottom_deck_3()
                     ignore_attack = False
-            
-
- 
-            #### Burning Royal Lib 1 ###
-            #goTo(56, 42, 14)
-            #goTo(166, 42, 14)c
-            #if (LOOP_COUNT % 10) == 0:
-            #    pydirectinput.keyDown('up')
-            #    pydirectinput.press('v') #assaulter
-            #    pydirectinput.keyUp("up")
-            #    time.sleep(0.5)
-            #    pydirectinput.press('q') #dark flare
-            #    time.sleep(0.2)
-            #    goTo(60, 15, 14)
-            #    pydirectinput.press('1') #erda fountain
-            #LOOP_COUNT += 1
-
-#def doBuff():
-#    print('Doing buffs')
-#    # Define your buffs
-#    pydirectinput.press('0')
-#    time.sleep(0.2)
-#    pydirectinput.press('8')
 
 def attack():
     skills_3s()
