@@ -119,12 +119,11 @@ def holdKey(key, hold_time):
 
 def goUp(distance):
     if abs(distance) >= 5:
-      # pydirectinput.press('x') #rope lift
         pydirectinput.keyDown('up')
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.keyUp('up')
-    elif abs(distance) >= 20:
+    elif abs(distance) >= 10:
         pydirectinput.press('x') #rope lift
     else:
         pydirectinput.press("alt")
@@ -341,7 +340,7 @@ def bottom_deck_3():
         pydirectinput.press("3")
         goTo(55,49,1)
         pydirectinput.press("3")
-        goTo(98,49,1)
+        goTo(95,49,1)
         pydirectinput.press("2")
         goTo(150,64,1)
         # timeout check
