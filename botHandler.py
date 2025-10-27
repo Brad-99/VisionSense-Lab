@@ -338,6 +338,7 @@ def bottom_deck_3():
         pydirectinput.press("3")
         goTo(97,49,1)
         pydirectinput.press("2")
+        goTo(150,51,1)
         # timeout check
         if time.time() - start_time > timeout:
             print("Timeout! Moving to safe point")
