@@ -48,7 +48,9 @@ def startBot():
                     # harsh_winter_4()
                     # eastern_outskirts()
                     # gcc2()
+                    ignore_attack = True
                     bottom_deck_3()
+                    ignore_attack = False
             
 
  
