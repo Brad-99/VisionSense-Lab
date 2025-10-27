@@ -366,7 +366,7 @@ def bottom_deck_3():
     start_time = time.time()
     if current_time - summon >= 60:
         sleep_duration = random.uniform(0.9, 1.05)
-        goTo(158,78,1)
+        goTo(150,78,1)
         goTo(87,78,1)
         pydirectinput.press("3")
         goTo(40,78,1)
@@ -378,7 +378,7 @@ def bottom_deck_3():
         # timeout check
         if time.time() - start_time > timeout:
             print("Timeout! Moving to safe point")
-        goTo(158,64,1)
+        goTo(150,64,1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
