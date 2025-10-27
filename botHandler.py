@@ -39,32 +39,16 @@ def startBot():
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
-            # Buffs and sync methods
-            #if currentTime > buffTimeOut:  # Every 3 minutes
-            #    doBuff()
-            #    buffTimeOut = time.time() + BUFF_TIME
-            # fma_nw()
-            # time.sleep(1)
-            # fma_nw2()
-            # continued
-            # goTo(40s 57, 10)
-            # goTo(162, 57, 10)
-            # if (LOOP_COUNT % 5) == 0:
-            #     pydirectinput.keyDown('x')
-            #     time.sleep(0.5)
-            # LOOP_COUNT += 1
 
-            # goTo(172,70,18)
-            # shiesty() 
-            # goTo(30,70,18)
-
+            ignore_attack = False
             while True:
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
-                    attack()
+                    if not ignore_attack:
+                        attack()
                     # harsh_winter_4()
                     # eastern_outskirts()
-                    bottom_deck_3()
                     # gcc2()
+                    bottom_deck_3()
             
 
  
