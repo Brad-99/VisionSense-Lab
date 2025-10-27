@@ -36,7 +36,9 @@ def startBot():
     LOOP_COUNT = 1
 
     time.sleep(3)
-    bottom_deck_3()  # 立即執行一次 bottom_deck_3()
+    global summon
+    summon = time.time() - 61  # Force summon on first run
+    bottom_deck_3()  
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
@@ -120,6 +122,7 @@ def goUp(distance):
         # pydirectinput.press('x') #rope lift
     else:
         pydirectinput.press("alt")
+    # time.sleep(1.2)
 
 def goDown():
     pydirectinput.keyDown('down')
@@ -334,7 +337,7 @@ def bottom_deck_3():
         pydirectinput.press("3")
         goTo(90,49,1)
         pydirectinput.press("2")
-        goTo(134,51,1)
+        goTo(132,51,1)
         goTo(150,64,1)
         # timeout check
         if time.time() - start_time > timeout:
