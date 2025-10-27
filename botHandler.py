@@ -34,7 +34,8 @@ def startBot():
     # timeout skills
     buffTimeOut = time.time()
     LOOP_COUNT = 1
-    
+
+    time.sleep(3)
     bottom_deck_3()
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
@@ -120,14 +121,13 @@ def holdKey(key, hold_time):
 
 def goUp(distance):
     if abs(distance) >= 5:
-        # pydirectinput.keyDown('up')
-        # pydirectinput.press(JUMP_KEY) # Adele upjump
-        # pydirectinput.press(JUMP_KEY) # Adele upjump
-        # pydirectinput.keyUp('up')
-        pydirectinput.press('x') #rope lift
+        pydirectinput.keyDown('up')
+        pydirectinput.press(JUMP_KEY) # Adele upjump
+        pydirectinput.press(JUMP_KEY) # Adele upjump
+        pydirectinput.keyUp('up')
+        # pydirectinput.press('x') #rope lift
     else:
         pydirectinput.press("alt")
-    time.sleep(1.2)
 
 def goDown():
     pydirectinput.keyDown('down')
@@ -338,9 +338,9 @@ def bottom_deck_3():
         pydirectinput.press("3")
         goTo(40,78,1)
         pydirectinput.press("3")
-        goTo(54,49,1)
+        goTo(50,49,1)
         pydirectinput.press("3")
-        goTo(92,49,1)
+        goTo(90,49,1)
         pydirectinput.press("2")
         goTo(150,64,1)
         # timeout check
