@@ -281,8 +281,9 @@ def eastern_outskirts():
         pydirectinput.press("3")
         goTo(88,41,1)
         pydirectinput.press("3")
-        goTo(34,38,1)
+        goTo(32,38,1)
         pydirectinput.press("2")
+        time.sleep(sleep_duration)
         # timeout check
         if time.time() - start_time > timeout:
             print("Timeout! Moving to safe point")
@@ -328,22 +329,22 @@ def bottom_deck_3():
     timeout = 30  # seconds
     start_time = time.time()
     if current_time - summon >= 60:
-        sleep_duration = random.uniform(0.9, 1.05)
-        goTo(150,78,1)
-        goTo(87,78,1)
-        pydirectinput.press("3")
+        sleep_duration = random.uniform(0.4, 0.5)
         goTo(40,78,1)
         pydirectinput.press("3")
         goTo(50,49,1)
         pydirectinput.press("3")
-        goTo(90,49,1)
+        goTo(96,49,1)
+        time.sleep(sleep_duration)
+        pydirectinput.press("3")
+        goTo(143,51,1)
         pydirectinput.press("2")
-        goTo(133,51,1)
-        goTo(145,64,1)
+        goTo(155,78,1)
+        goTo(118,78,1)
         # timeout check
         if time.time() - start_time > timeout:
             print("Timeout! Moving to safe point")
-            goTo(145,64,1)
+            goTo(118,78,1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
