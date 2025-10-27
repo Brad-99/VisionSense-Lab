@@ -373,7 +373,7 @@ def bottom_deck_3():
         pydirectinput.press("3")
         goTo(49,49,1)
         pydirectinput.press("3")
-        goTo(87,49,1)
+        goTo(97,49,1)
         pydirectinput.press("2")
         # timeout check
         if time.time() - start_time > timeout:
