@@ -23,6 +23,7 @@ JUMP_KEY = 'alt'
 BUFF_TIME = 33 * 1  # Seconds
 LOOP_COUNT = 1
 skill_3s=time.time()
+skill_6s=time.time()
 skill_15s=time.time()
 skill_60s=time.time()
 skill_120s=time.time()
