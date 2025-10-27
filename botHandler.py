@@ -45,7 +45,7 @@ def startBot():
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
                     if not ignore_attack:
                         attack()
-                        
+
                     ignore_attack = True
                     bottom_deck_3()
                     # harsh_winter_4()
@@ -103,7 +103,6 @@ def goToDirection(direction, distance):
         pydirectinput.press(JUMP_KEY, 1, 0)
         pydirectinput.press('c', 1, 0)
         time.sleep(0.01)
-        attack()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
         pydirectinput.keyUp(direction.lower())
     else:
