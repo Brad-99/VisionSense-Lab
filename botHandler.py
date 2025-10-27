@@ -43,15 +43,14 @@ def startBot():
             ignore_attack = False
             while True:
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
-                    if not ignore_attack:
-                        attack()
-
                     ignore_attack = True
                     bottom_deck_3()
                     # harsh_winter_4()
                     # eastern_outskirts()
                     # gcc2()
                     ignore_attack = False
+                    if not ignore_attack:
+                        attack()
 
 def attack():
     skills_3s()
@@ -125,9 +124,11 @@ def goUp(distance):
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.keyUp('up')
+    elif abs(distance) >= 20:
+        pydirectinput.press('x') #rope lift
     else:
         pydirectinput.press("alt")
-    time.sleep(1.2)
+    time.sleep(0.5)
 
 def goDown():
     pydirectinput.keyDown('down')
@@ -338,9 +339,9 @@ def bottom_deck_3():
         pydirectinput.press("3")
         goTo(40,78,1)
         pydirectinput.press("3")
-        goTo(44,49,1)
+        goTo(55,49,1)
         pydirectinput.press("3")
-        goTo(90,49,1)
+        goTo(98,49,1)
         pydirectinput.press("2")
         goTo(150,64,1)
         # timeout check
