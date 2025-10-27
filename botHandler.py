@@ -61,7 +61,8 @@ def startBot():
                 if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
                     attack()
                     # harsh_winter_4()
-                    eastern_outskirts()
+                    # eastern_outskirts()
+                    bottom_deck_3()
                     # gcc2()
             
 
@@ -89,6 +90,7 @@ def startBot():
 
 def attack():
     skills_3s()
+    skills_6s()
     skills_15s()
     skills_180s()
     skills_120s()
@@ -134,14 +136,16 @@ def goToDirection(direction, distance):
         pydirectinput.keyDown(direction.lower())
         # pydirectinput.press(JUMP_KEY, 1, 0.05)
         pydirectinput.press(JUMP_KEY, 1, 0)
-        time.sleep(0.1)
-        pydirectinput.press(JUMP_KEY, 1, 0)
+        pydirectinput.press('c', 1, 0)
         time.sleep(0.01)
         attack()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
         pydirectinput.keyUp(direction.lower())
     else:
-        holdKey(direction.lower(), 0.25)
+        # change hold time based on distance
+        # the closer the distance, the shorter the hold time
+        hold_time = min(0.25, max(0.05, abs(distance) / 100)) 
+        holdKey(direction.lower(), hold_time)
 
 # Movements
 def holdKey(key, hold_time):
@@ -180,8 +184,16 @@ def skills_3s():
     if current_time - skill_3s >= 3:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('a', 1, 0)
+        pydirectinput.press('1', 1, 0)
         skill_3s = time.time()
+def skills_6s():
+    global skill_6s
+    current_time = time.time()
+    if current_time - skill_6s >= 6:
+        sleep_duration = random.uniform(0.29, 0.39)
+        time.sleep(sleep_duration)
+        pydirectinput.press('a', 1, 0)
+        skill_6s = time.time()
 def skills_15s():
     global skill_15s
     current_time = time.time()
@@ -309,7 +321,7 @@ def eastern_outskirts():
         pydirectinput.press("2")
         # timeout check
         if time.time() - start_time > timeout:
-            print("Timeout! Moving to safe point (36,54,1).")
+            print("Timeout! Moving to safe point")
         goTo(36,54,1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
@@ -344,3 +356,29 @@ def gcc2():
         summon = time.time() 
 
 # def enfolding_forest_1()
+
+
+def bottom_deck_3():
+    global summon
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    if current_time - summon >= 60:
+        sleep_duration = random.uniform(0.9, 1.05)
+        goTo(158,78,1)
+        goTo(87,78,1)
+        pydirectinput.press("3")
+        goTo(40,78,1)
+        pydirectinput.press("3")
+        goTo(49,49,1)
+        pydirectinput.press("3")
+        goTo(87,49,1)
+        pydirectinput.press("2")
+        # timeout check
+        if time.time() - start_time > timeout:
+            print("Timeout! Moving to safe point")
+        goTo(158,64,1)
+        pydirectinput.keyDown('left')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('left')
+        summon = time.time()
