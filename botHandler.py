@@ -61,7 +61,7 @@ def attack():
     time.sleep(sleep_duration)
 
 
-def attack_while_moving(min_interval=1):
+def attack_while_moving(min_interval=0.6):
     global last_attack_while_moving
     now = time.time()
     # 若距離上次攻擊時間不到 min_interval，直接返回（避免重複按鍵）
@@ -346,6 +346,7 @@ def bottom_deck_3():
         goTo(50,49,1)
         pydirectinput.press("3")
         goTo(96,49,1)
+        goTo(64,49,1)
         pydirectinput.press("3")
         goTo(140,51,1)
         pydirectinput.press("2")
