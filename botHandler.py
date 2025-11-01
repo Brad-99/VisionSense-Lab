@@ -3,7 +3,7 @@ import win32gui
 from pip._vendor.distlib.compat import raw_input
 from datetime import datetime
 import requests
-
+import threading
 import handler
 import time
 import random
@@ -29,6 +29,7 @@ skill_60s=time.time()
 skill_120s=time.time()
 skill_180s=time.time()
 summon=time.time()
+last_attack_while_moving = 0.0
 
 def startBot():
     # timeout skills
@@ -59,10 +60,15 @@ def attack():
     sleep_duration = random.uniform(0.1, 0.4)
     time.sleep(sleep_duration)
 
-def attack_while_moving():
+
+def attack_while_moving(min_interval=1):
+    global last_attack_while_moving
+    now = time.time()
+    # 若距離上次攻擊時間不到 min_interval，直接返回（避免重複按鍵）
+    if now - last_attack_while_moving < min_interval:
+        return
+    last_attack_while_moving = now
     pydirectinput.press('shift', 1, 0)
-    sleep_duration = random.uniform(2, 3)
-    time.sleep(sleep_duration)
 
 def isInRange(targetX, targetY, playerCoords, wantedRange):
     xRange = abs(targetX - playerCoords.x)
@@ -102,7 +108,7 @@ def goToDirection(direction, distance):
         pydirectinput.press(JUMP_KEY, 1, 0)
         pydirectinput.press('c', 1, 0)
         time.sleep(0.01)
-        attack_while_moving()
+        threading.Thread(target=attack_while_moving, daemon=True).start()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
         pydirectinput.keyUp(direction.lower())
     else:
