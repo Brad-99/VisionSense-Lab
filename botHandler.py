@@ -35,7 +35,7 @@ def startBot():
     buffTimeOut = time.time()
     LOOP_COUNT = 1
 
-    time.sleep(3)
+    time.sleep(1)
     global summon
     summon = time.time() - 61  # Force summon on first run
     bottom_deck_3()  
@@ -60,9 +60,7 @@ def attack():
     time.sleep(sleep_duration)
 
 def attack_while_moving():
-    pydirectinput.press('shift', 1, 0)
-    sleep_duration = random.uniform(0.4, 0.5)
-    time.sleep(sleep_duration)
+    pydirectinput.press('shift', 1, 2)
 
 def isInRange(targetX, targetY, playerCoords, wantedRange):
     xRange = abs(targetX - playerCoords.x)
