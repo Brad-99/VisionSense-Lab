@@ -60,7 +60,9 @@ def attack():
     time.sleep(sleep_duration)
 
 def attack_while_moving():
-    pydirectinput.press('shift', 1, 2)
+    pydirectinput.press('shift', 1, 0)
+    sleep_duration = random.uniform(2, 3)
+    time.sleep(sleep_duration)
 
 def isInRange(targetX, targetY, playerCoords, wantedRange):
     xRange = abs(targetX - playerCoords.x)
