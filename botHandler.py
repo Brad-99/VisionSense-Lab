@@ -23,7 +23,7 @@ JUMP_KEY = 'alt'
 BUFF_TIME = 33 * 1  # Seconds
 LOOP_COUNT = 1
 skill_3s=time.time()
-skill_6s=time.time()
+skill_13s=time.time()
 skill_15s=time.time()
 skill_60s=time.time()
 skill_120s=time.time()
@@ -161,14 +161,14 @@ def skills_3s():
         time.sleep(sleep_duration)
         pydirectinput.press('1', 1, 0)
         skill_3s = time.time()
-def skills_6s():
-    global skill_6s
+def skills_13s():
+    global skill_13s
     current_time = time.time()
-    if current_time - skill_6s >= 6:
+    if current_time - skill_13s >= 13:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('a', 1, 0)
-        skill_6s = time.time()
+        skill_13s = time.time()
 def skills_15s():
     global skill_15s
     current_time = time.time()
