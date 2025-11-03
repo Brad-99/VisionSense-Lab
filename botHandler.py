@@ -51,7 +51,7 @@ def startBot():
 
 def attack():
     skills_3s()
-    skills_6s()
+    skills_13s()
     skills_15s()
     skills_180s()
     skills_120s()
