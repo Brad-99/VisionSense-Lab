@@ -194,6 +194,7 @@ def skills_120s():
      current_time = time.time()
      if current_time - skill_120s >= 120:
         sleep_duration = random.uniform(1, 1.2)
+        time.sleep(sleep_duration)
         pydirectinput.press('g', 1, 0)
         time.sleep(sleep_duration)
         pydirectinput.press('h', 1, 0)
