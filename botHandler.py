@@ -23,6 +23,7 @@ JUMP_KEY = 'alt'
 BUFF_TIME = 33 * 1  # Seconds
 LOOP_COUNT = 1
 skill_3s=time.time()
+skill_9s=time.time()
 skill_6s=time.time()
 skill_15s=time.time()
 skill_60s=time.time()
@@ -50,7 +51,7 @@ def startBot():
             attack()
 
 def attack():
-    skills_3s()
+    skills_9s()
     skills_6s()
     skills_15s()
     # skills_180s()
@@ -61,7 +62,7 @@ def attack():
     time.sleep(sleep_duration)
 
 
-def attack_while_moving(min_interval=0.5):
+def attack_while_moving(min_interval=1):
     global last_attack_while_moving
     now = time.time()
     # 若距離上次攻擊時間不到 min_interval，直接返回（避免重複按鍵）
@@ -153,14 +154,14 @@ def jumpDown():
     pydirectinput.keyUp('down')
 
 # Skills
-def skills_3s():
-    global skill_3s
+def skills_9s():
+    global skill_9s
     current_time = time.time()
-    if current_time - skill_3s >= 3:
+    if current_time - skill_9s >= 9:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('1', 1, 0)
-        skill_3s = time.time()
+        skill_9s = time.time()
 def skills_6s():
     global skill_6s
     current_time = time.time()
@@ -186,8 +187,6 @@ def skills_60s():
         pydirectinput.press('d', 1, 0)
         time.sleep(sleep_duration)
         pydirectinput.press('f', 1, 0)
-        time.sleep(sleep_duration)
-        pydirectinput.press('4', 1, 0)
         skill_60s = time.time()
 def skills_120s():
      global skill_120s
