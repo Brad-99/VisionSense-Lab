@@ -378,15 +378,15 @@ def lower_path():
     if current_time - summon >= 60:
         sleep_duration = random.uniform(0.4, 0.5)
         goTo(94,39,1)
-        goTo(161,39,1)
+        goTo(152,39,1)
         goTo(187,39,1)
         pydirectinput.press("w")
         goTo(161,20,1)
-        goTo(140,20,1)
+        goTo(152,20,1)
         # timeout check
         if time.time() - start_time > timeout:
             print("Timeout! Moving to safe point")
-            goTo(140,20,1)
+            goTo(152,20,1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
