@@ -23,7 +23,7 @@ JUMP_KEY = 'alt'
 BUFF_TIME = 33 * 1  # Seconds
 LOOP_COUNT = 1
 skill_3s=time.time()
-skill_9s=time.time()
+skill_10s=time.time()
 skill_6s=time.time()
 skill_15s=time.time()
 skill_60s=time.time()
@@ -40,18 +40,20 @@ def startBot():
     time.sleep(1)
     global summon
     summon = time.time() - 61  # Force summon on first run
-    bottom_deck_3()  
+    # bottom_deck_3()  
+    lower_path()  
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
             # eastern_outskirts()
-            bottom_deck_3()
+            # bottom_deck_3()  
+            lower_path()
             attack()
 
 def attack():
-    skills_9s()
+    skills_10s()
     skills_6s()
     skills_15s()
     # skills_180s()
@@ -154,14 +156,14 @@ def jumpDown():
     pydirectinput.keyUp('down')
 
 # Skills
-def skills_9s():
-    global skill_9s
+def skills_10s():
+    global skill_10s
     current_time = time.time()
-    if current_time - skill_9s >= 9:
+    if current_time - skill_10s >= 10:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('1', 1, 0)
-        skill_9s = time.time()
+        pydirectinput.press('q', 1, 0)
+        skill_10s = time.time()
 def skills_6s():
     global skill_6s
     current_time = time.time()
@@ -358,6 +360,27 @@ def bottom_deck_3():
         if time.time() - start_time > timeout:
             print("Timeout! Moving to safe point")
             goTo(118,78,1)
+        pydirectinput.keyDown('left')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('left')
+        summon = time.time()
+
+
+def lower_path():
+    global summon
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    if current_time - summon >= 60:
+        sleep_duration = random.uniform(0.4, 0.5)
+        goTo(94,39,1)
+        goTo(187,39,1)
+        pydirectinput.press("2")
+        goTo(131,20,1)
+        # timeout check
+        if time.time() - start_time > timeout:
+            print("Timeout! Moving to safe point")
+            goTo(131,20,1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
