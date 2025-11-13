@@ -59,9 +59,10 @@ def attack():
     # skills_180s()
     skills_120s()
     skills_60s()
-    pydirectinput.press('shift', 1, 0)
-    sleep_duration = random.uniform(0.1, 0.4)
+    pydirectinput.keyDown('shift')
+    sleep_duration = random.uniform(2, 3)
     time.sleep(sleep_duration)
+    pydirectinput.keyUp('shift')
 
 
 def attack_while_moving(min_interval=1):
@@ -375,12 +376,13 @@ def lower_path():
         sleep_duration = random.uniform(0.4, 0.5)
         goTo(94,39,1)
         goTo(187,39,1)
-        pydirectinput.press("2")
-        goTo(131,20,1)
+        pydirectinput.press("w")
+        goTo(161,20,1)
+        goTo(140,20,1)
         # timeout check
         if time.time() - start_time > timeout:
             print("Timeout! Moving to safe point")
-            goTo(131,20,1)
+            goTo(140,20,1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
