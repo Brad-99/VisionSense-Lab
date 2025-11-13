@@ -72,7 +72,10 @@ def attack_while_moving(min_interval=1):
     if now - last_attack_while_moving < min_interval:
         return
     last_attack_while_moving = now
-    pydirectinput.press('shift', 1, 0)
+    pydirectinput.keyDown('shift')
+    sleep_duration = random.uniform(0.5, 1)
+    time.sleep(sleep_duration)
+    pydirectinput.keyUp('shift')
 
 def isInRange(targetX, targetY, playerCoords, wantedRange):
     xRange = abs(targetX - playerCoords.x)
@@ -375,6 +378,7 @@ def lower_path():
     if current_time - summon >= 60:
         sleep_duration = random.uniform(0.4, 0.5)
         goTo(94,39,1)
+        goTo(161,39,1)
         goTo(187,39,1)
         pydirectinput.press("w")
         goTo(161,20,1)
