@@ -72,7 +72,7 @@ def attack_while_moving(min_interval=1):
         return
     last_attack_while_moving = now
     pydirectinput.keyDown('shift')
-    sleep_duration = random.uniform(0.5, 1)
+    sleep_duration = random.uniform(1, 2)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('shift')
 
@@ -401,16 +401,15 @@ def labyrinth_core_6():
     # loop moving between two points (A <-> B). After the 60s loop, go to
     # point C and press 'w' once, then update `summon`.
     if current_time - summon >= 60:
+        # Execute skills at the beginning
+        goTo(138, 39, 1)
+        pydirectinput.press("w")
+        goTo(114, 39, 1)
+        pydirectinput.press("q")
+        
         loop_start = time.time()
         loop_duration = 60  # seconds to spend bouncing between the two points
         # small randomized sleep values to make movement more natural
-        goTo(138, 39, 1)
-        pydirectinput.press("w")
-        goTo(93, 31, 1)
-        pydirectinput.keyDown('left')
-        time.sleep(random.uniform(0.1, 0.2))
-        pydirectinput.keyUp('left')
-        pydirectinput.press("q")
         while time.time() - loop_start < loop_duration and handler.botThread.isRunning():
             # Move to point A
             goTo(47, 76, 1)
@@ -419,6 +418,8 @@ def labyrinth_core_6():
             goTo(153, 76, 1)
             time.sleep(random.uniform(0.1, 0.3))
             # safety timeout check while looping
-        # After 60 seconds of bouncing between A and B, go to C and press 'w' once
-        # Reposition back to B so subsequent logic resumes from expected area
+            if time.time() - start_time > timeout:
+                print("Timeout! Moving to safe point")
+                break
+        
         summon = time.time()
