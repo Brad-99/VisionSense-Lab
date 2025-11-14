@@ -59,7 +59,7 @@ def attack():
     # skills_120s()
     # skills_60s()
     pydirectinput.keyDown('shift')
-    sleep_duration = random.uniform(1, 2)
+    sleep_duration = random.uniform(1, 1.5)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('shift')
 
@@ -72,7 +72,7 @@ def attack_while_moving(min_interval=1):
         return
     last_attack_while_moving = now
     pydirectinput.keyDown('shift')
-    sleep_duration = random.uniform(1, 2)
+    sleep_duration = random.uniform(1, 1.5)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('shift')
 
@@ -414,6 +414,6 @@ def labyrinth_core_6():
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(47, 76, 1)
-        time.sleep(random.uniform(1, 1.5))
+        time.sleep(random.uniform(0.2, 0.3))
         goTo(153, 76, 1)
-        time.sleep(random.uniform(1, 1.5))
+        time.sleep(random.uniform(0.2, 0.3))
