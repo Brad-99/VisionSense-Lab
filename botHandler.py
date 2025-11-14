@@ -64,7 +64,7 @@ def attack():
     pydirectinput.keyUp('shift')
 
 
-def attack_while_moving(min_interval=0.5):
+def attack_while_moving(min_interval=1):
     global last_attack_while_moving
     now = time.time()
     # 若距離上次攻擊時間不到 min_interval，直接返回（避免重複按鍵）
@@ -408,10 +408,16 @@ def labyrinth_core_6():
     # Always check if we should execute skills again (every 60s)
     if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
         goTo(138, 39, 1)
+        pydirectinput.keyDown('left')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('left')
         pydirectinput.press("w")
         goTo(114, 39, 1)
+        pydirectinput.keyDown('left')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('left')
         pydirectinput.press("q")
-        goTo(76, 58, 1)
+        goTo(78, 58, 1)
         goTo(145, 58, 1)
     else:
         # Rest of the 60 seconds: keep moving between two points
