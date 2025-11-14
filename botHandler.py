@@ -414,6 +414,6 @@ def labyrinth_core_6():
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(47, 76, 1)
-        time.sleep(random.uniform(0.1, 0.2))
+        time.sleep(random.uniform(1, 1.5))
         goTo(153, 76, 1)
-        time.sleep(random.uniform(0.1, 0.2))
+        time.sleep(random.uniform(1, 1.5))
