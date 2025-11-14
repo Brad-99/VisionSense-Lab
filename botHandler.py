@@ -407,7 +407,6 @@ def labyrinth_core_6():
     
     # Always check if we should execute skills again (every 60s)
     if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
-        goTo(149, 20, 1)
         goTo(138, 39, 1)
         pydirectinput.press("w")
         goTo(114, 39, 1)
