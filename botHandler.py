@@ -58,10 +58,10 @@ def attack():
     # skills_180s()
     # skills_120s()
     # skills_60s()
-    pydirectinput.keyDown('shift')
+    pydirectinput.keyDown('q')
     sleep_duration = random.uniform(0.5, 1)
     time.sleep(sleep_duration)
-    pydirectinput.keyUp('shift')
+    pydirectinput.keyUp('q')
 
 
 def attack_while_moving(min_interval=1):
@@ -71,10 +71,10 @@ def attack_while_moving(min_interval=1):
     if now - last_attack_while_moving < min_interval:
         return
     last_attack_while_moving = now
-    pydirectinput.keyDown('shift')
+    pydirectinput.keyDown('q')
     sleep_duration = random.uniform(3, 4)
     time.sleep(sleep_duration)
-    pydirectinput.keyUp('shift')
+    pydirectinput.keyUp('q')
 
 def isInRange(targetX, targetY, playerCoords, wantedRange):
     xRange = abs(targetX - playerCoords.x)
