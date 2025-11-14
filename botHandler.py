@@ -49,7 +49,7 @@ def startBot():
             currentTime = time.time()
             # bottom_deck_3()  
             labyrinth_core_6()
-            attack()
+            # attack()
 
 def attack():
     # skills_10s()
@@ -59,7 +59,7 @@ def attack():
     # skills_120s()
     # skills_60s()
     pydirectinput.keyDown('shift')
-    sleep_duration = random.uniform(1, 1.5)
+    sleep_duration = random.uniform(0.5, 1)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('shift')
 
@@ -72,7 +72,7 @@ def attack_while_moving(min_interval=1):
         return
     last_attack_while_moving = now
     pydirectinput.keyDown('shift')
-    sleep_duration = random.uniform(1, 1.5)
+    sleep_duration = random.uniform(2, 3)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('shift')
 
