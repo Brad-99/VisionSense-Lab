@@ -53,8 +53,8 @@ def startBot():
 
 def attack():
     # skills_10s()
-    skills_6s()
-    skills_15s()
+    # skills_6s()
+    # skills_15s()
     # skills_180s()
     # skills_120s()
     # skills_60s()
@@ -407,6 +407,7 @@ def labyrinth_core_6():
     
     # Always check if we should execute skills again (every 60s)
     if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
+        goTo(149, 20, 1)
         goTo(138, 39, 1)
         pydirectinput.press("w")
         goTo(114, 39, 1)
@@ -414,6 +415,6 @@ def labyrinth_core_6():
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(47, 76, 1)
-        time.sleep(random.uniform(0.1, 0.3))
+        time.sleep(random.uniform(0.1, 0.2))
         goTo(153, 76, 1)
-        time.sleep(random.uniform(0.1, 0.3))
+        time.sleep(random.uniform(0.1, 0.2))
