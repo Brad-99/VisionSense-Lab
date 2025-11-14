@@ -413,7 +413,7 @@ def labyrinth_core_6():
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
-        pydirectinput.press("q")
+        pydirectinput.press("e")
         goTo(145, 58, 1)
         goTo(120, 58, 1)
         goTo(74, 58, 1)
