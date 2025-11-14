@@ -173,7 +173,9 @@ def skills_6s():
     if current_time - skill_6s >= 6:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('a', 1, 0)
+        for _ in range(4):
+            pydirectinput.press('a', 1, 0)
+            time.sleep(random.uniform(0.05, 0.12))
         skill_6s = time.time()
 def skills_15s():
     global skill_15s
@@ -394,32 +396,24 @@ def lower_path():
 
 def labyrinth_core_6():
     global summon
+    # Run continuously: every 60 seconds, restart the cycle from skills
     current_time = time.time()
     timeout = 30  # seconds
     start_time = time.time()
-    # Every time this is called and >=60s since last summon, run a 60-second
-    # loop moving between two points (A <-> B). After the 60s loop, go to
-    # point C and press 'w' once, then update `summon`.
+    
+    # Execute skills and then loop for 60 seconds
     if current_time - summon >= 60:
-        # Execute skills at the beginning
+        summon = time.time()  # Reset timer immediately after triggering
+    
+    # Always check if we should execute skills again (every 60s)
+    if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
         goTo(138, 39, 1)
         pydirectinput.press("w")
         goTo(114, 39, 1)
         pydirectinput.press("q")
-        
-        loop_start = time.time()
-        loop_duration = 60  # seconds to spend bouncing between the two points
-        # small randomized sleep values to make movement more natural
-        while time.time() - loop_start < loop_duration and handler.botThread.isRunning():
-            # Move to point A
-            goTo(47, 76, 1)
-            time.sleep(random.uniform(0.1, 0.3))
-            # Move to point B
-            goTo(153, 76, 1)
-            time.sleep(random.uniform(0.1, 0.3))
-            # safety timeout check while looping
-            if time.time() - start_time > timeout:
-                print("Timeout! Moving to safe point")
-                break
-        
-        summon = time.time()
+    else:
+        # Rest of the 60 seconds: keep moving between two points
+        goTo(47, 76, 1)
+        time.sleep(random.uniform(0.1, 0.3))
+        goTo(153, 76, 1)
+        time.sleep(random.uniform(0.1, 0.3))
