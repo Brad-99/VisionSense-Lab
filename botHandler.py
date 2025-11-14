@@ -64,7 +64,7 @@ def attack():
     pydirectinput.keyUp('shift')
 
 
-def attack_while_moving(min_interval=1):
+def attack_while_moving(min_interval=0.5):
     global last_attack_while_moving
     now = time.time()
     # 若距離上次攻擊時間不到 min_interval，直接返回（避免重複按鍵）
@@ -72,7 +72,7 @@ def attack_while_moving(min_interval=1):
         return
     last_attack_while_moving = now
     pydirectinput.keyDown('shift')
-    sleep_duration = random.uniform(2, 3)
+    sleep_duration = random.uniform(3, 4)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('shift')
 
@@ -411,9 +411,11 @@ def labyrinth_core_6():
         pydirectinput.press("w")
         goTo(114, 39, 1)
         pydirectinput.press("q")
+        goTo(76, 58, 1)
+        goTo(145, 58, 1)
     else:
         # Rest of the 60 seconds: keep moving between two points
-        goTo(47, 76, 1)
-        time.sleep(random.uniform(0.2, 0.3))
         goTo(153, 76, 1)
+        time.sleep(random.uniform(0.2, 0.3))
+        goTo(47, 76, 1)
         time.sleep(random.uniform(0.2, 0.3))
