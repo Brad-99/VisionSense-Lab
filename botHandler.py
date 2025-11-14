@@ -41,26 +41,25 @@ def startBot():
     global summon
     summon = time.time() - 61  # Force summon on first run
     # bottom_deck_3()  
-    lower_path()  
+    labyrinth_core_6()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
-            # eastern_outskirts()
             # bottom_deck_3()  
-            lower_path()
+            labyrinth_core_6()
             attack()
 
 def attack():
-    skills_10s()
+    # skills_10s()
     skills_6s()
     skills_15s()
     # skills_180s()
-    skills_120s()
-    skills_60s()
+    # skills_120s()
+    # skills_60s()
     pydirectinput.keyDown('shift')
-    sleep_duration = random.uniform(2, 3)
+    sleep_duration = random.uniform(1, 2)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('shift')
 
@@ -390,4 +389,36 @@ def lower_path():
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
+        summon = time.time()
+
+
+def labyrinth_core_6():
+    global summon
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    # Every time this is called and >=60s since last summon, run a 60-second
+    # loop moving between two points (A <-> B). After the 60s loop, go to
+    # point C and press 'w' once, then update `summon`.
+    if current_time - summon >= 60:
+        loop_start = time.time()
+        loop_duration = 60  # seconds to spend bouncing between the two points
+        # small randomized sleep values to make movement more natural
+        goTo(138, 39, 1)
+        pydirectinput.press("w")
+        goTo(93, 31, 1)
+        pydirectinput.keyDown('left')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('left')
+        pydirectinput.press("q")
+        while time.time() - loop_start < loop_duration and handler.botThread.isRunning():
+            # Move to point A
+            goTo(47, 76, 1)
+            time.sleep(random.uniform(0.1, 0.3))
+            # Move to point B
+            goTo(153, 76, 1)
+            time.sleep(random.uniform(0.1, 0.3))
+            # safety timeout check while looping
+        # After 60 seconds of bouncing between A and B, go to C and press 'w' once
+        # Reposition back to B so subsequent logic resumes from expected area
         summon = time.time()
