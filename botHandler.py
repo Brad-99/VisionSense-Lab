@@ -415,9 +415,10 @@ def labyrinth_core_6():
         pydirectinput.keyUp('left')
         pydirectinput.press("q")
         goTo(145, 58, 1)
+        goTo(74, 58, 1)
     else:
         # Rest of the 60 seconds: keep moving between two points
-        goTo(153, 76, 1)
-        time.sleep(random.uniform(0.2, 0.3))
         goTo(47, 76, 1)
+        time.sleep(random.uniform(0.2, 0.3))
+        goTo(153, 76, 1)
         time.sleep(random.uniform(0.2, 0.3))
