@@ -49,13 +49,14 @@ def startBot():
             currentTime = time.time()
             # bottom_deck_3()  
             library_6()
+            skills_300s()
             # attack()
 
 def attack():
     # skills_10s()
     # skills_6s()
     # skills_15s()
-    skills_300s()
+    # skills_300s()
     # skills_120s()
     # skills_60s()
     pydirectinput.keyDown('q')
@@ -207,13 +208,14 @@ def skills_120s():
         skill_120s = time.time()
 def skills_300s():
     global skill_300s
+    for _ in range(3):  # press 3 times
+        pydirectinput.press('9', 1, 0)
+        time.sleep(0.05)  
     current_time = time.time()
     if current_time - skill_300s >= 300:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        for _ in range(5):  # press 5 times
+        for _ in range(3):  # press 3 times
             pydirectinput.press('9', 1, 0)
-            time.sleep(0.05)  # small natural delay (optional)
+            time.sleep(0.05) 
         skill_300s = time.time()
 
 def shiesty():
@@ -450,6 +452,4 @@ def library_6():
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(158, 69, 1)
-        time.sleep(random.uniform(0.2, 0.3))
-        goTo(34, 69, 1)
-        time.sleep(random.uniform(0.2, 0.3))
+        goTo(15, 69, 1)
