@@ -445,7 +445,7 @@ def library_6():
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
-        time.sleep(random.uniform(0.3, 0.4))
+        time.sleep(random.uniform(0.8, 1))
         pydirectinput.press("e")
     else:
         # Rest of the 60 seconds: keep moving between two points
