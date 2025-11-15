@@ -131,12 +131,12 @@ def holdKey(key, hold_time):
     pydirectinput.keyUp(key)
 
 def goUp(distance):
-    if abs(distance) >= 5 and abs(distance) < 35:
+    if abs(distance) >= 5 and abs(distance) < 20:
         pydirectinput.keyDown('up')
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.keyUp('up')
-    if abs(distance) >= 35:
+    if abs(distance) >= 20:
         pydirectinput.press('x') #rope lift
         time.sleep(1.2)
     else:
@@ -441,11 +441,11 @@ def library_6():
         goTo(39, 36, 1)
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
-        goTo(90, 36, 1)
+        goTo(96, 36, 1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
-        time.sleep(random.uniform(1, 1.3))
+        time.sleep(random.uniform(1.0, 1.1))
         pydirectinput.press("e")
     else:
         # Rest of the 60 seconds: keep moving between two points
