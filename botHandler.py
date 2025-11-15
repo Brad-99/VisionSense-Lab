@@ -441,7 +441,7 @@ def library_6():
         goTo(39, 36, 1)
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
-        goTo(89, 20, 1)
+        goTo(61, 36, 1)
         goTo(94, 36, 1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
