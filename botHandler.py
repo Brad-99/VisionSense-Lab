@@ -28,7 +28,7 @@ skill_6s=time.time()
 skill_15s=time.time()
 skill_60s=time.time()
 skill_120s=time.time()
-skill_180s=time.time()
+skill_600s=time.time()
 summon=time.time()
 last_attack_while_moving = 0.0
 
@@ -41,21 +41,21 @@ def startBot():
     global summon
     summon = time.time() - 61  # Force summon on first run
     # bottom_deck_3()  
-    labyrinth_core_6()
+    library_6()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
             # bottom_deck_3()  
-            labyrinth_core_6()
+            library_6()
             # attack()
 
 def attack():
     # skills_10s()
     # skills_6s()
     # skills_15s()
-    # skills_180s()
+    skills_600s()
     # skills_120s()
     # skills_60s()
     pydirectinput.keyDown('q')
@@ -131,12 +131,12 @@ def holdKey(key, hold_time):
     pydirectinput.keyUp(key)
 
 def goUp(distance):
-    if abs(distance) >= 5 and abs(distance) < 15:
+    if abs(distance) >= 5 and abs(distance) < 35:
         pydirectinput.keyDown('up')
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.keyUp('up')
-    if abs(distance) >= 15:
+    if abs(distance) >= 35:
         pydirectinput.press('x') #rope lift
         time.sleep(1.2)
     else:
@@ -205,14 +205,16 @@ def skills_120s():
         time.sleep(sleep_duration)
         pydirectinput.press('h', 1, 0)
         skill_120s = time.time()
-def skills_180s():
-     global skill_180s
-     current_time = time.time()
-     if current_time - skill_180s >= 365:
+def skills_600s():
+    global skill_600s
+    current_time = time.time()
+    if current_time - skill_600s >= 600:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('b', 1, 0)
-        skill_180s = time.time()
+        for _ in range(5):  # press 5 times
+            pydirectinput.press('9', 1, 0)
+            time.sleep(0.05)  # small natural delay (optional)
+        skill_600s = time.time()
 
 def shiesty():
      global summon
@@ -393,7 +395,6 @@ def lower_path():
         pydirectinput.keyUp('left')
         summon = time.time()
 
-
 def labyrinth_core_6():
     global summon
     # Run continuously: every 60 seconds, restart the cycle from skills
@@ -423,3 +424,38 @@ def labyrinth_core_6():
         time.sleep(random.uniform(0.2, 0.3))
         goTo(153, 76, 1)
         time.sleep(random.uniform(0.2, 0.3))
+
+def library_6():
+    global summon
+    # Run continuously: every 60 seconds, restart the cycle from skills
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    
+    # Execute skills and then loop for 60 seconds
+    if current_time - summon >= 60:
+        summon = time.time()  # Reset timer immediately after triggering
+    
+    # Always check if we should execute skills again (every 60s)
+    if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
+        goTo(39, 36, 1)
+        pydirectinput.press("w")
+        goTo(97, 36, 1)
+        pydirectinput.keyDown('right')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('right')
+        pydirectinput.press("e")
+    else:
+        # Rest of the 60 seconds: keep moving between two points
+        goTo(158, 69, 1)
+        time.sleep(random.uniform(0.2, 0.3))
+        goTo(39, 69, 1)
+        time.sleep(random.uniform(0.2, 0.3))
+        # goTo(97, 69, 1)
+        # time.sleep(random.uniform(0.2, 0.3))
+        # goTo(158, 69, 1)
+        # time.sleep(random.uniform(0.2, 0.3))
+        # goTo(158, 32, 1)
+        # time.sleep(random.uniform(0.2, 0.3))
+        # goTo(97, 36, 1)
+        # time.sleep(random.uniform(0.2, 0.3))
