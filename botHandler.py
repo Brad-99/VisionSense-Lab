@@ -28,7 +28,7 @@ skill_6s=time.time()
 skill_15s=time.time()
 skill_60s=time.time()
 skill_120s=time.time()
-skill_600s=time.time()
+skill_300s=time.time()
 summon=time.time()
 last_attack_while_moving = 0.0
 
@@ -55,7 +55,7 @@ def attack():
     # skills_10s()
     # skills_6s()
     # skills_15s()
-    skills_600s()
+    skills_300s()
     # skills_120s()
     # skills_60s()
     pydirectinput.keyDown('q')
@@ -205,16 +205,16 @@ def skills_120s():
         time.sleep(sleep_duration)
         pydirectinput.press('h', 1, 0)
         skill_120s = time.time()
-def skills_600s():
-    global skill_600s
+def skills_300s():
+    global skill_300s
     current_time = time.time()
-    if current_time - skill_600s >= 600:
+    if current_time - skill_300s >= 300:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         for _ in range(5):  # press 5 times
             pydirectinput.press('9', 1, 0)
             time.sleep(0.05)  # small natural delay (optional)
-        skill_600s = time.time()
+        skill_300s = time.time()
 
 def shiesty():
      global summon
