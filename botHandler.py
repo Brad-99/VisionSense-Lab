@@ -28,7 +28,7 @@ skill_6s=time.time()
 skill_15s=time.time()
 skill_60s=time.time()
 skill_120s=time.time()
-skill_300s=time.time()
+feed_pet=time.time()
 summon=time.time()
 last_attack_while_moving = 0.0
 
@@ -38,8 +38,9 @@ def startBot():
     LOOP_COUNT = 1
 
     time.sleep(1)
-    global summon
+    global summon, feed_pet
     summon = time.time() - 61  # Force summon on first run
+    feed_pet = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
     library_6()
 
@@ -49,14 +50,14 @@ def startBot():
             currentTime = time.time()
             # bottom_deck_3()  
             library_6()
-            skills_300s()
+            feed_pet()
             # attack()
 
 def attack():
     # skills_10s()
     # skills_6s()
     # skills_15s()
-    # skills_300s()
+    # feed_pet()
     # skills_120s()
     # skills_60s()
     pydirectinput.keyDown('q')
@@ -206,17 +207,14 @@ def skills_120s():
         time.sleep(sleep_duration)
         pydirectinput.press('h', 1, 0)
         skill_120s = time.time()
-def skills_300s():
-    global skill_300s
-    for _ in range(3):  # press 3 times
-        pydirectinput.press('9', 1, 0)
-        time.sleep(0.05)  
+def feed_pet():
+    global feed_pet
     current_time = time.time()
-    if current_time - skill_300s >= 300:
-        for _ in range(3):  # press 3 times
-            pydirectinput.press('9', 1, 0)
+    if current_time - feed_pet >= 600:
+        for _ in range(6):  # press 6 times
+            pydirectinput.press('f', 1, 0)
             time.sleep(0.05) 
-        skill_300s = time.time()
+        feed_pet = time.time()
 
 def shiesty():
      global summon
