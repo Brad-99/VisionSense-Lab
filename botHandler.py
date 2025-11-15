@@ -74,7 +74,7 @@ def attack_while_moving(min_interval=1):
         return
     last_attack_while_moving = now
     pydirectinput.keyDown('q')
-    sleep_duration = random.uniform(2.5, 3)
+    sleep_duration = random.uniform(0.9, 1)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('q')
 
@@ -441,12 +441,12 @@ def library_6():
         goTo(39, 36, 1)
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
-        goTo(61, 36, 1)
-        goTo(94, 36, 1)
+        goTo(89, 36, 1)
+        goTo(96, 36, 1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
-        time.sleep(random.uniform(1.0, 1.1))
+        time.sleep(random.uniform(1.2, 1.3))
         pydirectinput.press("e")
     else:
         # Rest of the 60 seconds: keep moving between two points
