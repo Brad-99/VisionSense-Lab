@@ -133,12 +133,12 @@ def holdKey(key, hold_time):
     pydirectinput.keyUp(key)
 
 def goUp(distance):
-    if abs(distance) >= 5 and abs(distance) < 20:
+    if abs(distance) >= 5 and abs(distance) < 6:
         pydirectinput.keyDown('up')
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.press(JUMP_KEY) # Adele upjump
         pydirectinput.keyUp('up')
-    if abs(distance) >= 20:
+    if abs(distance) >= 7:
         pydirectinput.press('x') #rope lift
         time.sleep(1.2)
     else:
