@@ -133,13 +133,12 @@ def holdKey(key, hold_time):
     pydirectinput.keyUp(key)
 
 def goUp(distance):
-    if abs(distance) >= 5 and abs(distance) < 20:
-        pydirectinput.keyDown('up')
-        time.sleep(random.uniform(0.3, 0.4))
-        pydirectinput.press(JUMP_KEY) # Adele upjump
-        pydirectinput.press(JUMP_KEY) # Adele upjump
-        pydirectinput.keyUp('up')
-    if abs(distance) >= 20:
+    # if abs(distance) >= 5 and abs(distance) < 20:
+    #     pydirectinput.keyDown('up')
+    #     pydirectinput.press(JUMP_KEY) # Adele upjump
+    #     pydirectinput.press(JUMP_KEY) # Adele upjump
+    #     pydirectinput.keyUp('up')
+    if abs(distance) >= 5:
         pydirectinput.press('x') #rope lift
         time.sleep(1.2)
     else:
@@ -499,12 +498,8 @@ def alley_4():
         goTo(46, 42, 1)
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
-        goTo(30, 42, 1)
-        pydirectinput.press("up")
-        time.sleep(random.uniform(0.4, 0.6))
-        pydirectinput.press("up")
 
-        goTo(162, 41, 1)
+        goTo(167, 41, 1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
