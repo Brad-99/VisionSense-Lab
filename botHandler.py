@@ -42,14 +42,14 @@ def startBot():
     summon = time.time() - 61  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
-    library_6()
+    theater_3()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
             # bottom_deck_3()  
-            library_6()
+            theater_3()
             feed_pet()
             # attack()
 
@@ -453,3 +453,27 @@ def library_6():
         # Rest of the 60 seconds: keep moving between two points
         goTo(158, 69, 1)
         goTo(15, 69, 1)
+
+def theater_3():
+    global summon
+    # Run continuously: every 60 seconds, restart the cycle from skills
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    
+    # Execute skills and then loop for 60 seconds
+    if current_time - summon >= 60:
+        summon = time.time()  # Reset timer immediately after triggering
+    
+    # Always check if we should execute skills again (every 60s)
+    if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
+        goTo(24, 35, 1)
+        time.sleep(random.uniform(0.3, 0.4))
+        pydirectinput.press("w")
+        goTo(127, 42, 1)
+        time.sleep(random.uniform(1, 1.1))
+        pydirectinput.press("e")
+    else:
+        # Rest of the 60 seconds: keep moving between two points
+        goTo(159, 73, 1)
+        goTo(40, 73, 1)
