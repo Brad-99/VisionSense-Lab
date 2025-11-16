@@ -467,12 +467,16 @@ def theater_3():
     
     # Always check if we should execute skills again (every 60s)
     if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
-        goTo(24, 35, 1)
+        goTo(127, 42, 1)
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
-        goTo(127, 42, 1)
+        goTo(24, 35, 1)
+        pydirectinput.keyDown('right')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('right')
         time.sleep(random.uniform(1, 1.1))
         pydirectinput.press("e")
+        goTo(10, 35, 1)
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(159, 73, 1)
