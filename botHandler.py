@@ -499,7 +499,7 @@ def alley_4():
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
         
-        goTo(122, 40, 1)
+        goTo(165, 72, 1)
         goTo(167, 41, 1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
@@ -510,5 +510,5 @@ def alley_4():
         
     else:
         # Rest of the 60 seconds: keep moving between two points
-        goTo(187, 72, 1)
+        goTo(170, 72, 1)
         goTo(32, 72, 1)
