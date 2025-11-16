@@ -508,4 +508,4 @@ def alley_4():
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(160, 72, 1)
-        goTo(57, 72, 1)
+        goTo(32, 72, 1)
