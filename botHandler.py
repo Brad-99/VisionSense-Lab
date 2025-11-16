@@ -495,6 +495,11 @@ def alley_4():
     
     # Always check if we should execute skills again (every 60s)
     if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
+        goTo(46, 42, 1)
+        time.sleep(random.uniform(0.3, 0.4))
+        pydirectinput.press("w")
+        
+        goTo(122, 40, 1)
         goTo(167, 41, 1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
@@ -502,9 +507,6 @@ def alley_4():
         time.sleep(random.uniform(1, 1.1))
         pydirectinput.press("e")
        
-        goTo(46, 42, 1)
-        time.sleep(random.uniform(0.3, 0.4))
-        pydirectinput.press("w")
         
     else:
         # Rest of the 60 seconds: keep moving between two points
