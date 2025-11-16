@@ -42,14 +42,14 @@ def startBot():
     summon = time.time() - 61  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
-    theater_3()
+    alley_4()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
             # bottom_deck_3()  
-            theater_3()
+            alley_4()
             feed_pet()
             # attack()
 
@@ -467,18 +467,45 @@ def theater_3():
     
     # Always check if we should execute skills again (every 60s)
     if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
-        goTo(127, 42, 1)
-        time.sleep(random.uniform(0.3, 0.4))
-        pydirectinput.press("w")
-        goTo(72, 28, 1)
         goTo(39, 35, 1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
         time.sleep(random.uniform(1, 1.1))
         pydirectinput.press("e")
-        goTo(10, 35, 1)
+        
+        goTo(127, 42, 1)
+        time.sleep(random.uniform(0.3, 0.4))
+        pydirectinput.press("w")
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(159, 73, 1)
         goTo(40, 73, 1)
+
+def alley_4():
+    global summon
+    # Run continuously: every 60 seconds, restart the cycle from skills
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    
+    # Execute skills and then loop for 60 seconds
+    if current_time - summon >= 60:
+        summon = time.time()  # Reset timer immediately after triggering
+    
+    # Always check if we should execute skills again (every 60s)
+    if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
+        goTo(46, 42, 1)
+        pydirectinput.keyDown('left')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('left')
+        time.sleep(random.uniform(1, 1.1))
+        pydirectinput.press("e")
+        
+        goTo(167, 41, 1)
+        time.sleep(random.uniform(0.3, 0.4))
+        pydirectinput.press("w")
+    else:
+        # Rest of the 60 seconds: keep moving between two points
+        goTo(160, 72, 1)
+        goTo(57, 72, 1)
