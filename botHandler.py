@@ -499,6 +499,7 @@ def alley_4():
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
 
+        goTo(90, 43, 1)    
         goTo(116, 40, 1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
