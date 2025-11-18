@@ -85,18 +85,29 @@ mini_map_frame.pack(fill='x', pady=(5, 5), padx=5)
 mini_map_frame.grid_columnconfigure(0, weight=1)
 mini_map_frame.grid_columnconfigure(1, weight=0)
 
+# unified font for consistent baseline
+MINI_FONT = ('Segoe UI', 11)
+
+# Left: label
 ttk.Label(
     mini_map_frame,
-    text='Mini map position:',
+    text='Minimap:',
+    font=MINI_FONT,
     foreground=FG_SUB,
-    background=BG_CARD
+    background=BG_CARD,
+    anchor='w',
+    padding=(0, 2)
 ).grid(row=0, column=0, sticky='w')
 
+# Right: dynamic status
 miniStatusLabel = ttk.Label(
     mini_map_frame,
     text='Waiting',
-    style='Status.TLabel',
-    foreground='#F0AE13'
+    font=MINI_FONT,   # unified font
+    foreground='#F0AE13',
+    background=BG_CARD,
+    anchor='e',
+    padding=(0, 2)
 )
 miniStatusLabel.grid(row=0, column=1, sticky='e')
 
@@ -104,26 +115,29 @@ miniStatusLabel.grid(row=0, column=1, sticky='e')
 ttk.Label(liveFrame, text='📡 Live Info', style='Header.TLabel').pack(anchor='center', pady=(0, 20))
 
 coordinate_frame = ttk.Frame(liveFrame, style='Card.TFrame')
-coordinate_frame.pack(fill='x', pady=(5, 5), padx=5)
+coordinate_frame.pack(anchor='center', pady=(5, 5))  # 置中，不再 fill x
 
+# 中間對齊
 coordinate_frame.grid_columnconfigure(0, weight=1)
 
-# Text on first line
+# 第一行：文字
 ttk.Label(
     coordinate_frame,
     text='Coordinates:',
     foreground=FG_SUB,
-    background=BG_CARD
-).grid(row=0, column=0, sticky='w')
+    background=BG_CARD,
+    anchor='center'
+).grid(row=0, column=0, sticky='n', pady=(0, 2))
 
-# Numbers on second line (no overlap)
+# 第二行：座標
 coordinatesLabel = ttk.Label(
     coordinate_frame,
     text='(10,10)',
     style='Status.TLabel',
-    foreground='#00BFFF'
+    foreground='#00BFFF',
+    anchor='center'
 )
-coordinatesLabel.grid(row=1, column=0, sticky='w', pady=(2, 0))
+coordinatesLabel.grid(row=1, column=0, sticky='n')
 
 # --- Control block ---
 ttk.Label(optionsFrame, text='🎮 Controller', style='Header.TLabel').pack(anchor='center', pady=(0, 20))
