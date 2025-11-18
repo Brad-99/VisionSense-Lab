@@ -28,23 +28,31 @@ style.configure('TLabel', background=BG_CARD, foreground=FG_TEXT, font=('Segoe U
 style.configure('Header.TLabel', font=('Segoe UI Semibold', 12, 'bold'), foreground='#F5F5F5', background=BG_CARD)
 style.configure('Status.TLabel', font=('Consolas', 11, 'bold'), background=BG_CARD)
 
-style.configure('TButton',
-                background='#2F2F2F',
-                foreground='#FFFFFF',
-                font=('Segoe UI', 11, 'bold'),
-                padding=(8, 8),
-                borderwidth=0)
-style.map('TButton',
-          background=[('active', '#3D3D3D')],
-          foreground=[('active', '#FFFFFF')])
+style.configure(
+    'TButton',
+    background='#2F2F2F',
+    foreground='#FFFFFF',
+    font=('Segoe UI', 11, 'bold'),
+    padding=(8, 8),
+    borderwidth=0
+)
+style.map(
+    'TButton',
+    background=[('active', '#3D3D3D')],
+    foreground=[('active', '#FFFFFF')]
+)
 
-style.configure('Running.TButton',
-                background=ACCENT,
-                foreground='#FFFFFF',
-                font=('Segoe UI', 11, 'bold'))
-style.map('Running.TButton',
-          background=[('active', '#14D542')],
-          foreground=[('active', '#FFFFFF')])
+style.configure(
+    'Running.TButton',
+    background=ACCENT,
+    foreground='#FFFFFF',
+    font=('Segoe UI', 11, 'bold')
+)
+style.map(
+    'Running.TButton',
+    background=[('active', '#14D542')],
+    foreground=[('active', '#FFFFFF')]
+)
 
 # --- Main frame ---
 main_frame = ttk.Frame(root, padding=25, style='TFrame')
@@ -70,6 +78,28 @@ ttk.Button(initFrame, text='Load Entities', command=handler.initButtonClick, wid
 
 ttk.Separator(initFrame, orient='horizontal').pack(fill='x', pady=15)
 
+# Mini map status block (re-introduced)
+mini_map_frame = ttk.Frame(initFrame, style='Card.TFrame')
+mini_map_frame.pack(fill='x', pady=(5, 5), padx=5)
+
+mini_map_frame.grid_columnconfigure(0, weight=1)
+mini_map_frame.grid_columnconfigure(1, weight=0)
+
+ttk.Label(
+    mini_map_frame,
+    text='Mini map position:',
+    foreground=FG_SUB,
+    background=BG_CARD
+).grid(row=0, column=0, sticky='w')
+
+miniStatusLabel = ttk.Label(
+    mini_map_frame,
+    text='Waiting',
+    style='Status.TLabel',
+    foreground='#F0AE13'
+)
+miniStatusLabel.grid(row=0, column=1, sticky='e')
+
 # --- Live Info block ---
 ttk.Label(liveFrame, text='📡 Live Info', style='Header.TLabel').pack(anchor='center', pady=(0, 20))
 
@@ -77,12 +107,23 @@ coordinate_frame = ttk.Frame(liveFrame, style='Card.TFrame')
 coordinate_frame.pack(fill='x', pady=(5, 5), padx=5)
 
 coordinate_frame.grid_columnconfigure(0, weight=1)
-coordinate_frame.grid_columnconfigure(1, weight=0)
 
-ttk.Label(coordinate_frame, text='Coordinates:', foreground=FG_SUB, background=BG_CARD).grid(row=0, column=0, sticky='w')
+# Text on first line
+ttk.Label(
+    coordinate_frame,
+    text='Coordinates:',
+    foreground=FG_SUB,
+    background=BG_CARD
+).grid(row=0, column=0, sticky='w')
 
-coordinatesLabel = ttk.Label(coordinate_frame, text='(10,10)', style='Status.TLabel', foreground='#00BFFF')
-coordinatesLabel.grid(row=0, column=1, sticky='e')
+# Numbers on second line (no overlap)
+coordinatesLabel = ttk.Label(
+    coordinate_frame,
+    text='(10,10)',
+    style='Status.TLabel',
+    foreground='#00BFFF'
+)
+coordinatesLabel.grid(row=1, column=0, sticky='w', pady=(2, 0))
 
 # --- Control block ---
 ttk.Label(optionsFrame, text='🎮 Controller', style='Header.TLabel').pack(anchor='center', pady=(0, 20))
@@ -95,13 +136,41 @@ ttk.Separator(optionsFrame, orient='horizontal').pack(fill='x', pady=10)
 status_frame = ttk.Frame(optionsFrame, style='Card.TFrame')
 status_frame.pack(anchor='center', pady=10)
 
-ttk.Label(status_frame, text='Status:', foreground=FG_SUB, background=BG_CARD).pack(side='left')
-botStatusLabel = ttk.Label(status_frame, text='not running', foreground=ERROR, style='Status.TLabel')
+ttk.Label(
+    status_frame,
+    text='Status:',
+    foreground=FG_SUB,
+    background=BG_CARD
+).pack(side='left')
+
+botStatusLabel = ttk.Label(
+    status_frame,
+    text='not running',
+    foreground=ERROR,
+    style='Status.TLabel'
+)
 botStatusLabel.pack(side='left')
 
 # --- Update functions ---
+
+def updateMiniMapLabel(error=None):
+    """
+    Keep same behavior as original version:
+    - If error is not None: show error text in red.
+    - Else: show 'Done' in green.
+    Initial state 'Waiting' is set when the label is created.
+    """
+    if error is not None:
+        miniStatusLabel['text'] = str(error)
+        miniStatusLabel['foreground'] = ERROR
+    else:
+        miniStatusLabel['text'] = 'Done'
+        miniStatusLabel['foreground'] = ACCENT
+
+
 def updateCurrentCoordinate(point):
     coordinatesLabel['text'] = f'({point.x}, {point.y})'
+
 
 def updateBotStatus(isRunning):
     if isRunning:

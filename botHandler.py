@@ -100,7 +100,21 @@ def goTo(targetX, targetY, rangeFromCoords, isRune=False):
         yDistance = targetY - currentPlayerLocation.y
         time.sleep(0.3)
         while abs(yDistance) > WANTED_RANGE and handler.botThread.isRunning():  # Check the Y Axis
-            goDown() if yDistance > 0 else goUp(yDistance)
+            if yDistance > 0:
+                goDown()
+            else:
+                # try to go up; if goUp returns False (failed within timeout),
+                # attempt to correct X position first then retry going up
+                success = goUp(targetY)
+                if not success:
+                    # attempt to correct X until within WANTED_RANGE, then retry
+                    currentPlayerLocation = handler.gameMonitorInstance.getPlayerCoords()
+                    xDistance = targetX - currentPlayerLocation.x
+                    while abs(xDistance) > WANTED_RANGE and handler.botThread.isRunning():
+                        goToDirection('RIGHT', xDistance) if xDistance > 0 else goToDirection('LEFT', xDistance)
+                        currentPlayerLocation = handler.gameMonitorInstance.getPlayerCoords()
+                        xDistance = targetX - currentPlayerLocation.x
+                    # after X correction, continue loop which will call goUp again
             time.sleep(0.1)
             if isRune:
                 time.sleep(0.85)
@@ -132,17 +146,49 @@ def holdKey(key, hold_time):
         pydirectinput.keyDown(key)
     pydirectinput.keyUp(key)
 
-def goUp(distance):
-    # if abs(distance) >= 5 and abs(distance) < 20:
-    #     pydirectinput.keyDown('up')
-    #     pydirectinput.press(JUMP_KEY) # Adele upjump
-    #     pydirectinput.press(JUMP_KEY) # Adele upjump
-    #     pydirectinput.keyUp('up')
-    if abs(distance) >= 5:
-        pydirectinput.press('x') #rope lift
-        time.sleep(1.2)
-    else:
-        pydirectinput.press("alt")
+def goUp(targetY):
+    """
+    Try to move the player up toward targetY. If movement toward targetY
+    succeeds within 10 seconds, return True. If not, return False so caller
+    can attempt X-correction and retry.
+    """
+    start = time.time()
+    # read initial position
+    current = handler.gameMonitorInstance.getPlayerCoords()
+    if current is None:
+        return False
+    prev_y = current.y
+    # Try for up to 10 seconds
+    while time.time() - start < 10 and handler.botThread.isRunning():
+        # recompute distance to target
+        current = handler.gameMonitorInstance.getPlayerCoords()
+        if current is None:
+            return False
+        distance = targetY - current.y
+        # if already within small epsilon, success
+        if abs(distance) < 1:
+            return True
+
+        # If distance magnitude is reasonably large, try rope lift
+        if abs(distance) >= 5:
+            pydirectinput.press('x')  # rope lift
+            time.sleep(1.2)
+        else:
+            # small upward adjustment (alt jump)
+            pydirectinput.press("alt")
+
+        # brief pause then re-check position
+        time.sleep(0.15)
+        current = handler.gameMonitorInstance.getPlayerCoords()
+        if current is None:
+            return False
+        # success if moved closer to targetY
+        if abs(targetY - current.y) < abs(targetY - prev_y):
+            return True
+        prev_y = current.y
+
+    # timed out
+    return False
 
 def goDown():
     pydirectinput.keyDown('down')
@@ -502,6 +548,7 @@ def alley_4():
         goTo(90, 43, 1)
         time.sleep(random.uniform(0.1, 0.2))    
         pydirectinput.press(JUMP_KEY, 1, 0)
+        time.sleep(random.uniform(0.1, 0.12))    
         pydirectinput.press('c', 1, 0)
         goTo(116, 40, 1)
         pydirectinput.keyDown('right')
