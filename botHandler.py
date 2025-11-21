@@ -193,16 +193,14 @@ def goUp(targetY):
 def goDown():
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY)
-    sleep_duration = random.uniform(0.9, 1.0)
+    sleep_duration = random.uniform(1.1, 1.3)
     time.sleep(sleep_duration)
-    #pydirectinput.press('d')
     pydirectinput.keyUp('down')
-    #pydirectinput.press('ctrl')
 
 def jumpDown():
     pydirectinput.keyDown('down')
-    pydirectinput.press('alt', 1, 0.05)
-    sleep_duration = random.uniform(0.29, 0.39)
+    pydirectinput.press(JUMP_KEY, 1, 0.05) #same
+    sleep_duration = random.uniform(1.1, 1.3)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('down')
 
@@ -262,41 +260,23 @@ def feed_pet():
             time.sleep(0.05) 
         feed_pet_time = time.time()
 
-def shiesty():
-     global summon
-     current_time = time.time()
-     if current_time - summon >= 60:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        #pydirectinput.press('3', 1, 0)
-        time.sleep(0.5)
-        jumpDown()
-        time.sleep(0.8)
-        pydirectinput.press('s')
-        time.sleep(1)
-        pydirectinput.press('up')
-        time.sleep(1)
-        pydirectinput.press('3')
-        time.sleep(1)
-        summon = time.time()
-def shiesty2():
-     global summon
-     current_time = time.time()
-     if current_time - summon >= 60:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        pydirectinput.press('3', 1, 0)
-        goTo(38,80,14)
-        goTo(152,78,6)
-        time.sleep(0.4)
-        goTo(123,67,6)
-        time.sleep(0.5)
-        pydirectinput.press('s')
-        goTo(123,67,12)
-        time.sleep(1)
-        pydirectinput.press('3')
-        time.sleep(1)
-        summon = time.time()
+# def shiesty():
+#      global summon
+#      current_time = time.time()
+#      if current_time - summon >= 60:
+#         sleep_duration = random.uniform(0.29, 0.39)
+#         time.sleep(sleep_duration)
+#         #pydirectinput.press('3', 1, 0)
+#         time.sleep(0.5)
+#         jumpDown()
+#         time.sleep(0.8)
+#         pydirectinput.press('s')
+#         time.sleep(1)
+#         pydirectinput.press('up')
+#         time.sleep(1)
+#         pydirectinput.press('3')
+#         time.sleep(1)
+#         summon = time.time()
 
 # harsh winter 4
         # goTo(29,72,1) bot left
@@ -557,8 +537,6 @@ def alley_4():
         time.sleep(random.uniform(1, 1.1))
         pydirectinput.press("e")
         goTo(160, 57, 1)
-       
-        
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(160, 72, 1)
