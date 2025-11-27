@@ -599,5 +599,5 @@ def summer_4():
 
     else:
         # Rest of the 60 seconds: keep moving between two points
-        goTo(165, 64, 1)
+        goTo(160, 64, 1)
         goTo(29, 64, 1)
