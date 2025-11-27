@@ -198,16 +198,18 @@ def goUp(targetY):
 def goDown():
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY)
+    time.sleep(0.3)
+    pydirectinput.keyUp('down')
     sleep_duration = random.uniform(1.0, 1.1)
     time.sleep(sleep_duration)
-    pydirectinput.keyUp('down')
 
 def jumpDown():
     pydirectinput.keyDown('down')
-    pydirectinput.press(JUMP_KEY, 1, 0.05) #same
+    pydirectinput.press(JUMP_KEY)
+    time.sleep(0.3)
+    pydirectinput.keyUp('down')
     sleep_duration = random.uniform(1.0, 1.1)
     time.sleep(sleep_duration)
-    pydirectinput.keyUp('down')
 
 # Skills
 def skills_10s():
@@ -590,10 +592,10 @@ def summer_4():
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
 
-        goTo(160, 34, 1)
-        pydirectinput.keyDown('left')
+        goTo(105, 34, 1)
+        pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
-        pydirectinput.keyUp('left')
+        pydirectinput.keyUp('right')
         time.sleep(random.uniform(0.5, 0.6))
         pydirectinput.press("e")
 
