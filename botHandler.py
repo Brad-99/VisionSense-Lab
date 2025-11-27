@@ -42,14 +42,14 @@ def startBot():
     summon = time.time() - 61  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
-    lab_4()
+    summer_4()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
             # bottom_deck_3()  
-            lab_4()
+            summer_4()
             feed_pet()
             # attack()
 
@@ -170,11 +170,16 @@ def goUp(targetY):
             return True
 
         # If distance magnitude is reasonably large, try rope lift
-        if abs(distance) >= 5:
-            pydirectinput.press('x')  # rope lift
-            time.sleep(1.2)
+        if abs(distance) >= 5 and abs(distance) < 20:
+            pydirectinput.keyDown('up')
+            pydirectinput.press(JUMP_KEY) # Adele upjump
+            time.sleep(0.3)
+            pydirectinput.press(JUMP_KEY) # Adele upjump
+            pydirectinput.keyUp('up')
+        if abs(distance) >= 20:
+            pydirectinput.press('x') #rope lift
+            time.sleep(1.0)
         else:
-            # small upward adjustment (alt jump)
             pydirectinput.press("alt")
 
         # brief pause then re-check position
@@ -193,14 +198,14 @@ def goUp(targetY):
 def goDown():
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY)
-    sleep_duration = random.uniform(1.1, 1.3)
+    sleep_duration = random.uniform(0.6, 0.8)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('down')
 
 def jumpDown():
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY, 1, 0.05) #same
-    sleep_duration = random.uniform(1.1, 1.3)
+    sleep_duration = random.uniform(0.6, 0.8)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('down')
 
@@ -568,3 +573,31 @@ def lab_4():
         # Rest of the 60 seconds: keep moving between two points
         goTo(167, 77, 1)
         goTo(44, 77, 1)
+
+def summer_4():
+    global summon
+    # Run continuously: every 60 seconds, restart the cycle from skills
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    # Execute skills and then loop for 60 seconds
+    if current_time - summon >= 60:
+        summon = time.time()  # Reset timer immediately after triggering
+    
+    # Always check if we should execute skills again (every 60s)
+    if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
+        goTo(35, 33, 1)
+        time.sleep(random.uniform(0.3, 0.4))
+        pydirectinput.press("w")
+
+        goTo(160, 34, 1)
+        pydirectinput.keyDown('left')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('left')
+        time.sleep(random.uniform(0.5, 0.6))
+        pydirectinput.press("e")
+
+    else:
+        # Rest of the 60 seconds: keep moving between two points
+        goTo(165, 64, 1)
+        goTo(29, 64, 1)
