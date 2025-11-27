@@ -586,7 +586,7 @@ def summer_4():
     
     # Always check if we should execute skills again (every 60s)
     if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
-        goTo(35, 33, 1)
+        goTo(31, 33, 1)
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
 
