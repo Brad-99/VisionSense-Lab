@@ -170,13 +170,13 @@ def goUp(targetY):
             return True
 
         # If distance magnitude is reasonably large, try rope lift
-        if abs(distance) >= 5 and abs(distance) < 20:
-            pydirectinput.keyDown('up')
-            pydirectinput.press(JUMP_KEY) # Adele upjump
-            time.sleep(0.3)
-            pydirectinput.press(JUMP_KEY) # Adele upjump
-            pydirectinput.keyUp('up')
-        if abs(distance) >= 20:
+        # if abs(distance) >= 5 and abs(distance) < 20:
+        #     pydirectinput.keyDown('up')
+        #     pydirectinput.press(JUMP_KEY) # Adele upjump
+        #     time.sleep(0.3)
+        #     pydirectinput.press(JUMP_KEY) # Adele upjump
+        #     pydirectinput.keyUp('up')
+        if abs(distance) >= 5:
             pydirectinput.press('x') #rope lift
             time.sleep(1.0)
         else:
@@ -198,14 +198,14 @@ def goUp(targetY):
 def goDown():
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY)
-    sleep_duration = random.uniform(0.6, 0.8)
+    sleep_duration = random.uniform(1.0, 1.1)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('down')
 
 def jumpDown():
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY, 1, 0.05) #same
-    sleep_duration = random.uniform(0.6, 0.8)
+    sleep_duration = random.uniform(1.0, 1.1)
     time.sleep(sleep_duration)
     pydirectinput.keyUp('down')
 
