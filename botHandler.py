@@ -603,3 +603,29 @@ def summer_4():
         # Rest of the 60 seconds: keep moving between two points
         goTo(160, 64, 1)
         goTo(29, 64, 1)
+
+def summer_5():
+    global summon
+    # Run continuously: every 60 seconds, restart the cycle from skills
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    # Execute skills and then loop for 80 seconds
+    if current_time - summon >= 80:
+        summon = time.time()  # Reset timer immediately after triggering
+    
+    # Always check if we should execute skills again (every 80s)
+    if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
+        goTo(33, 36, 1)
+        pydirectinput.keyDown('right')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('right')
+        time.sleep(random.uniform(0.5, 0.6))
+        pydirectinput.press("e")
+
+    else:
+        # Rest of the 80 seconds: keep moving between two points
+        goTo(91, 52, 1)
+        goTo(192, 64, 1)
+        time.sleep(random.uniform(1, 1.1))
+        pydirectinput.press("up")
