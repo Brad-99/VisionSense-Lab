@@ -42,14 +42,14 @@ def startBot():
     summon = time.time() - 61  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
-    summer_4()
+    summer_5()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
             # bottom_deck_3()  
-            summer_4()
+            summer_5()
             feed_pet()
             # attack()
 
