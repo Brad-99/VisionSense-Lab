@@ -42,14 +42,14 @@ def startBot():
     summon = time.time() - 61  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
-    summer_5()
+    summer_4()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
             # bottom_deck_3()  
-            summer_5()
+            summer_4()
             feed_pet()
             # attack()
 
@@ -196,19 +196,21 @@ def goUp(targetY):
     return False
 
 def goDown():
+    sleep_duration = random.uniform(0.8, 0.9)
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY)
     time.sleep(0.3)
     pydirectinput.keyUp('down')
-    sleep_duration = random.uniform(1.0, 1.1)
+    sleep_duration = random.uniform(0.5, 0.6)
     time.sleep(sleep_duration)
 
 def jumpDown():
+    sleep_duration = random.uniform(0.8, 0.9)
     pydirectinput.keyDown('down')
     pydirectinput.press(JUMP_KEY)
     time.sleep(0.3)
     pydirectinput.keyUp('down')
-    sleep_duration = random.uniform(1.0, 1.1)
+    sleep_duration = random.uniform(0.5, 0.6)
     time.sleep(sleep_duration)
 
 # Skills
