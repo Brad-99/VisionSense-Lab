@@ -624,6 +624,7 @@ def summer_5():
         pydirectinput.keyUp('right')
         time.sleep(random.uniform(0.5, 0.6))
         pydirectinput.press("e")
+        goTo(150, 20, 1)
 
     else:
         # Rest of the 80 seconds: keep moving between two points
