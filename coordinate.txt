@@ -1,6 +1,0 @@
-Calm beach 2
-147 51 r
-113 48
-85 48
-45 35
-22 48 stand here
