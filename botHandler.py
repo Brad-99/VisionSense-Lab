@@ -54,7 +54,7 @@ def startBot():
             attack()
 
 def attack():
-    # skills_10s()
+    skills_10s()
     # skills_6s()
     # skills_15s()
     # feed_pet()
@@ -220,7 +220,7 @@ def skills_10s():
     if current_time - skill_10s >= 10:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('q', 1, 0)
+        pydirectinput.press('1', 1, 0)
         skill_10s = time.time()
 def skills_6s():
     global skill_6s
@@ -388,14 +388,14 @@ def bottom_deck_3():
     if current_time - summon >= 60:
         sleep_duration = random.uniform(0.4, 0.5)
         goTo(40,78,1)
-        pydirectinput.press("3")
+        pydirectinput.press("w")
         goTo(50,49,1)
-        pydirectinput.press("3")
+        pydirectinput.press("w")
         goTo(64,49,1)
         goTo(96,49,1)
-        pydirectinput.press("3")
+        pydirectinput.press("w")
         goTo(140,51,1)
-        pydirectinput.press("2")
+        pydirectinput.press("e")
         goTo(145,78,1)
         goTo(118,78,1)
         # timeout check
