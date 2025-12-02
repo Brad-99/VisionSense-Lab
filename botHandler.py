@@ -41,29 +41,24 @@ def startBot():
     global summon, feed_pet_time
     summon = time.time() - 61  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
-    bottom_deck_3()  
-    # summer_4()
+    calm_beach_3()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
-            bottom_deck_3()  
-            # summer_4()
-            feed_pet()
+            calm_beach_3()
             attack()
 
 def attack():
-    skills_10s()
-    # skills_6s()
-    # skills_15s()
+    # skills_10s()
+    skills_15s()
+    skills_12s()
+    skills_60s()
     # feed_pet()
     # skills_120s()
-    # skills_60s()
-    pydirectinput.keyDown('q')
-    sleep_duration = random.uniform(0.5, 1)
-    time.sleep(sleep_duration)
-    pydirectinput.keyUp('q')
+    
+    pydirectinput.press('q', 1, 8)
 
 
 def attack_while_moving(min_interval=1):
@@ -127,9 +122,7 @@ def goToDirection(direction, distance):
     if abs(distance) >= 25:  # Check if this is long enough for double jump
         pydirectinput.keyDown(direction.lower())
         # pydirectinput.press(JUMP_KEY, 1, 0.05)
-        pydirectinput.press(JUMP_KEY, 1, 0)
-        pydirectinput.press('c', 1, 0)
-        time.sleep(0.01)
+        pydirectinput.press(JUMP_KEY, 2, 0.3)
         threading.Thread(target=attack_while_moving, daemon=True).start()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
         pydirectinput.keyUp(direction.lower())
@@ -222,14 +215,14 @@ def skills_10s():
         time.sleep(sleep_duration)
         pydirectinput.press('1', 1, 0)
         skill_10s = time.time()
-def skills_6s():
+def skills_12s():
     global skill_6s
     current_time = time.time()
     if current_time - skill_6s >= 6:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         for _ in range(4):
-            pydirectinput.press('a', 1, 0)
+            pydirectinput.press('2', 1, 0)
             time.sleep(random.uniform(0.05, 0.12))
         skill_6s = time.time()
 def skills_15s():
@@ -238,7 +231,7 @@ def skills_15s():
     if current_time - skill_15s >= 15:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('s', 1, 0)
+        pydirectinput.press('1', 1, 0)
         skill_15s = time.time()
 def skills_60s():
     global skill_60s
@@ -246,9 +239,7 @@ def skills_60s():
     if current_time - skill_60s >= 60:
         sleep_duration = random.uniform(1.0, 1.5)
         time.sleep(sleep_duration)
-        pydirectinput.press('d', 1, 0)
-        time.sleep(sleep_duration)
-        pydirectinput.press('f', 1, 0)
+        pydirectinput.press('3', 1, 0)
         skill_60s = time.time()
 def skills_120s():
      global skill_120s
@@ -631,3 +622,23 @@ def summer_5():
         goTo(192, 64, 1)
         time.sleep(random.uniform(1, 1.1))
         pydirectinput.press("up")
+
+
+def calm_beach_3():
+    global summon
+    current_time = time.time()
+    timeout = 30  # seconds
+    start_time = time.time()
+    if current_time - summon >= 80:
+        sleep_duration = random.uniform(0.4, 0.5)
+        goTo(146,51,1)
+        pydirectinput.press("w")
+        goTo(119,48,1)
+        pydirectinput.press("w")
+        goTo(86,48,1)
+        pydirectinput.press("w")
+        goTo(28,48,1)
+        pydirectinput.keyDown('right')
+        time.sleep(random.uniform(0.1, 0.2))
+        pydirectinput.keyUp('right')
+        summon = time.time()
