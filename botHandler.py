@@ -622,15 +622,15 @@ def autumn_4():
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
 
+        goTo(112, 39, 1)
+        time.sleep(random.uniform(0.5, 0.6))
+
         goTo(156, 37, 1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('left')
         time.sleep(random.uniform(0.5, 0.6))
         pydirectinput.press("e")
-        goTo(112, 39, 1)
-        time.sleep(random.uniform(0.5, 0.6))
-
     else:
         # Rest of the 60 seconds: keep moving between two points
         goTo(164, 68, 1)
