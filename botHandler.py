@@ -39,7 +39,7 @@ def startBot():
 
     time.sleep(1)
     global summon, feed_pet_time
-    summon = time.time() - 61  # Force summon on first run
+    summon = time.time() - 81  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     calm_beach_3()
 
@@ -57,7 +57,7 @@ def attack():
     skills_60s()
     # feed_pet()
     # skills_120s()
-    pydirectinput.press('q', 1, 2)
+    pydirectinput.press('q', 1, 0)
 
 
 def attack_while_moving(min_interval=1):
