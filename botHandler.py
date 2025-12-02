@@ -42,14 +42,14 @@ def startBot():
     summon = time.time() - 61  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
-    summer_4()
+    autumn_4()
 
     while True:
         if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
             # Don't touch
             currentTime = time.time()
             # bottom_deck_3()  
-            summer_4()
+            autumn_4()
             feed_pet()
             # attack()
 
@@ -606,29 +606,30 @@ def summer_4():
         goTo(160, 64, 1)
         goTo(29, 64, 1)
 
-def summer_5():
+def autumn_4():
     global summon
     # Run continuously: every 60 seconds, restart the cycle from skills
     current_time = time.time()
     timeout = 30  # seconds
     start_time = time.time()
-    # Execute skills and then loop for 80 seconds
-    if current_time - summon >= 80:
+    # Execute skills and then loop for 60 seconds
+    if current_time - summon >= 60:
         summon = time.time()  # Reset timer immediately after triggering
     
-    # Always check if we should execute skills again (every 80s)
+    # Always check if we should execute skills again (every 60s)
     if time.time() - summon < 5:  # First 5 seconds after trigger: execute skills
-        goTo(33, 36, 1)
-        pydirectinput.keyDown('right')
+        goTo(43, 39, 1)
+        time.sleep(random.uniform(0.3, 0.4))
+        pydirectinput.press("w")
+
+        goTo(156, 37, 1)
+        pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
-        pydirectinput.keyUp('right')
+        pydirectinput.keyUp('left')
         time.sleep(random.uniform(0.5, 0.6))
         pydirectinput.press("e")
-        goTo(169, 20, 1)
 
     else:
-        # Rest of the 80 seconds: keep moving between two points
-        goTo(91, 52, 1)
-        goTo(192, 64, 1)
-        time.sleep(random.uniform(1, 1.1))
-        pydirectinput.press("up")
+        # Rest of the 60 seconds: keep moving between two points
+        goTo(164, 68, 1)
+        goTo(28, 68, 1)
