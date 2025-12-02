@@ -57,8 +57,7 @@ def attack():
     skills_60s()
     # feed_pet()
     # skills_120s()
-    
-    pydirectinput.press('q', 1, 8)
+    pydirectinput.press('q', 1, 2)
 
 
 def attack_while_moving(min_interval=1):
@@ -122,7 +121,9 @@ def goToDirection(direction, distance):
     if abs(distance) >= 25:  # Check if this is long enough for double jump
         pydirectinput.keyDown(direction.lower())
         # pydirectinput.press(JUMP_KEY, 1, 0.05)
-        pydirectinput.press(JUMP_KEY, 2, 0.3)
+        pydirectinput.press(JUMP_KEY, 1, 0)
+        time.sleep(0.2)
+        pydirectinput.press(JUMP_KEY, 1, 0)
         threading.Thread(target=attack_while_moving, daemon=True).start()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
         pydirectinput.keyUp(direction.lower())
