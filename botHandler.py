@@ -628,6 +628,8 @@ def autumn_4():
         pydirectinput.keyUp('left')
         time.sleep(random.uniform(0.5, 0.6))
         pydirectinput.press("e")
+        goTo(112, 39, 1)
+        time.sleep(random.uniform(0.5, 0.6))
 
     else:
         # Rest of the 60 seconds: keep moving between two points
