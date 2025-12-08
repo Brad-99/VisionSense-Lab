@@ -652,6 +652,9 @@ def winter_4():
         time.sleep(random.uniform(0.3, 0.4))
         pydirectinput.press("w")
 
+        goTo(104, 43, 1)
+        time.sleep(random.uniform(0.5, 0.6))
+
         goTo(161, 43, 1)
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.1, 0.2))
