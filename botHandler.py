@@ -172,9 +172,9 @@ def goToDirection(direction, distance):
 
 # Movements
 def holdKey(key, hold_time):
-    startTime = time.time()
-    while time.time() - startTime < hold_time:
-        pydirectinput.keyDown(key)
+    # Hold a key for the requested duration without busy-waiting.
+    pydirectinput.keyDown(key)
+    time.sleep(hold_time)
     pydirectinput.keyUp(key)
 
 def goUp(targetY):
