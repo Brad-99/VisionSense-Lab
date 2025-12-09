@@ -6,6 +6,7 @@ import utils
 import numpy
 import datetime
 import requests
+import time
 
 playerIcon = Image.open(r'C:\Users\rayra\Code\maple\pics\playerIcon.png')
 
@@ -30,6 +31,9 @@ class GameMonitor:
                 if currentPlayerLocation is not None:
                     self.setPlayerCoords(currentPlayerLocation)
                     gui.updateCurrentCoordinate(currentPlayerLocation)  # Update the live coords in gui
+                time.sleep(0.05)
+            else:
+                time.sleep(0.2)
 
 def findCoordsOnMiniMap(innerIcon):
     miniMapImage = screenManager.getMiniMapScreenshot()

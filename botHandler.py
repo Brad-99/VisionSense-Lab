@@ -31,6 +31,8 @@ skill_120s=time.time()
 feed_pet_time=time.time()
 summon=time.time()
 last_attack_while_moving = 0.0
+attack_thread_lock = threading.Lock()
+attack_thread_active = False
 
 def startBot():
     # timeout skills
@@ -45,13 +47,21 @@ def startBot():
     winter_4()
 
     while True:
-        if handler.botThread.isRunning() and handler.gameMonitorInstance.getPlayerCoords() is not None:
-            # Don't touch
-            currentTime = time.time()
-            # bottom_deck_3()  
-            winter_4()
-            feed_pet()
-            # attack()
+        if not handler.botThread.isRunning():
+            time.sleep(0.2)
+            continue
+
+        if handler.gameMonitorInstance.getPlayerCoords() is None:
+            time.sleep(0.1)
+            continue
+
+        # Don't touch
+        currentTime = time.time()
+        # bottom_deck_3()  
+        winter_4()
+        feed_pet()
+        # attack()
+        time.sleep(random.uniform(0.05, 0.1))
 
 def attack():
     # skills_10s()
@@ -67,16 +77,33 @@ def attack():
 
 
 def attack_while_moving(min_interval=1):
-    global last_attack_while_moving
+    """
+    Fire a short attack without flooding the system with threads.
+    Only one worker runs at a time and honors a minimum interval.
+    """
+    global last_attack_while_moving, attack_thread_active
     now = time.time()
-    # 若距離上次攻擊時間不到 min_interval，直接返回（避免重複按鍵）
-    if now - last_attack_while_moving < min_interval:
-        return
-    last_attack_while_moving = now
-    pydirectinput.keyDown('q')
-    sleep_duration = random.uniform(0.9, 1)
-    time.sleep(sleep_duration)
-    pydirectinput.keyUp('q')
+    with attack_thread_lock:
+        if attack_thread_active:
+            return
+        if now - last_attack_while_moving < min_interval:
+            return
+        attack_thread_active = True
+        last_attack_while_moving = now
+
+    def _attack_worker():
+        global attack_thread_active
+        try:
+            pydirectinput.keyDown('q')
+            sleep_duration = random.uniform(0.9, 1)
+            time.sleep(sleep_duration)
+            pydirectinput.keyUp('q')
+        finally:
+            with attack_thread_lock:
+                attack_thread_active = False
+
+    threading.Thread(target=_attack_worker, daemon=True).start()
+
 
 def isInRange(targetX, targetY, playerCoords, wantedRange):
     xRange = abs(targetX - playerCoords.x)
@@ -130,7 +157,7 @@ def goToDirection(direction, distance):
         pydirectinput.press(JUMP_KEY, 1, 0)
         pydirectinput.press('c', 1, 0)
         time.sleep(0.01)
-        threading.Thread(target=attack_while_moving, daemon=True).start()
+        attack_while_moving()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
         pydirectinput.keyUp(direction.lower())
     else:
