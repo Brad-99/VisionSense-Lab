@@ -31,9 +31,9 @@ class GameMonitor:
                 if currentPlayerLocation is not None:
                     self.setPlayerCoords(currentPlayerLocation)
                     gui.updateCurrentCoordinate(currentPlayerLocation)  # Update the live coords in gui
-                time.sleep(0.05)
+                time.sleep(0.08)
             else:
-                time.sleep(0.2)
+                time.sleep(0.3)
 
 def findCoordsOnMiniMap(innerIcon):
     miniMapImage = screenManager.getMiniMapScreenshot()

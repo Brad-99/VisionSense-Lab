@@ -33,6 +33,10 @@ summon=time.time()
 last_attack_while_moving = 0.0
 attack_thread_lock = threading.Lock()
 attack_thread_active = False
+LOOP_SLEEP_ACTIVE_MIN = 0.05  # min delay when bot is running
+LOOP_SLEEP_ACTIVE_MAX = 0.1   # max delay when bot is running
+LOOP_SLEEP_IDLE = 0.4         # delay when bot is paused
+LOOP_SLEEP_NO_COORD = 0.15    # delay when coords are not ready
 
 def startBot():
     # timeout skills
@@ -48,11 +52,11 @@ def startBot():
 
     while True:
         if not handler.botThread.isRunning():
-            time.sleep(0.2)
+            time.sleep(LOOP_SLEEP_IDLE)
             continue
 
         if handler.gameMonitorInstance.getPlayerCoords() is None:
-            time.sleep(0.1)
+            time.sleep(LOOP_SLEEP_NO_COORD)
             continue
 
         # Don't touch
@@ -61,7 +65,7 @@ def startBot():
         winter_4()
         feed_pet()
         # attack()
-        time.sleep(random.uniform(0.05, 0.1))
+        time.sleep(random.uniform(LOOP_SLEEP_ACTIVE_MIN, LOOP_SLEEP_ACTIVE_MAX))
 
 def attack():
     # skills_10s()
