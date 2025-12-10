@@ -1,3 +1,4 @@
+from pathlib import Path
 from PIL import Image
 import screenManager
 import gui
@@ -8,7 +9,8 @@ import datetime
 import requests
 import time
 
-playerIcon = Image.open(r'C:\Users\rayra\Code\maple\pics\playerIcon.png')
+BASE_DIR = Path(__file__).resolve().parent
+playerIcon = Image.open(BASE_DIR / 'pics' / 'playerIcon.png')
 
 class GameMonitor:
     def __init__(self, currentHp=None, currentPlayerCoords=None):
@@ -37,6 +39,8 @@ class GameMonitor:
 
 def findCoordsOnMiniMap(innerIcon):
     miniMapImage = screenManager.getMiniMapScreenshot()
+    if miniMapImage is None:
+        return None
     innerIconArr = numpy.asarray(innerIcon)
     miniMapArr = numpy.asarray(miniMapImage)
 
@@ -58,6 +62,8 @@ def findCoordsOnMiniMap(innerIcon):
 
 def findCoordsOfColor(target_color=(255, 239, 0), tolerance=10):
     miniMapImage = screenManager.getMiniMapScreenshot()
+    if miniMapImage is None:
+        return None
     miniMapArr = numpy.asarray(miniMapImage)
 
     # Ensure target color is a NumPy array

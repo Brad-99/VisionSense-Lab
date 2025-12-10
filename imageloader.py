@@ -222,12 +222,15 @@ import win32gui
 import mss
 import time
 import numpy as np
+from pathlib import Path
 
 # Constants (Update these as per your existing setup)
 MINIMAP_BOTTOM_BORDER = 5  # Placeholder values
 MINIMAP_TOP_BORDER = 5
-MM_TL_TEMPLATE = cv2.imread(r'C:\Users\rayra\Code\maple\pics\minimap_tl_template.png', 0)
-MM_BR_TEMPLATE = cv2.imread(r'C:\Users\rayra\Code\maple\pics\minimap_br_template.png', 0)
+BASE_DIR = Path(__file__).resolve().parent
+PICS_DIR = BASE_DIR / "pics"
+MM_TL_TEMPLATE = cv2.imread(str(PICS_DIR / 'minimap_tl_template.png'), 0)
+MM_BR_TEMPLATE = cv2.imread(str(PICS_DIR / 'minimap_br_template.png'), 0)
 MMT_HEIGHT = max(MM_TL_TEMPLATE.shape[0], MM_BR_TEMPLATE.shape[0])
 MMT_WIDTH = max(MM_TL_TEMPLATE.shape[1], MM_BR_TEMPLATE.shape[1])
 
