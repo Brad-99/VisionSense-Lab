@@ -99,7 +99,7 @@ def attack_while_moving(min_interval=1):
             # sleep_duration = random.uniform(0.9, 1)
             # time.sleep(sleep_duration)
             # pydirectinput.keyUp('q')
-            pydirectinput.press('q', 1, 0)
+            pydirectinput.press('q', 1, 1)
         finally:
             with attack_thread_lock:
                 attack_thread_active = False
