@@ -708,6 +708,7 @@ def calm_beach_2():
         pydirectinput.press("w")
         goTo(68,48,1)
         pydirectinput.press("w")
+        goTo(29,48,1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
