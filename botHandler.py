@@ -61,10 +61,8 @@ def startBot():
 
         # Don't touch
         currentTime = time.time()
-        # bottom_deck_3()  
         calm_beach_3()
-        feed_pet()
-        # attack()
+        attack()
         time.sleep(random.uniform(LOOP_SLEEP_ACTIVE_MIN, LOOP_SLEEP_ACTIVE_MAX))
 
 def attack():
