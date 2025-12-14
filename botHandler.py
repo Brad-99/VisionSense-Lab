@@ -48,7 +48,7 @@ def startBot():
     summon = time.time() - 81  # Force summon on first run
     feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
-    calm_beach_3()
+    calm_beach_2()
 
     while True:
         if not handler.botThread.isRunning():
@@ -61,7 +61,7 @@ def startBot():
 
         # Don't touch
         currentTime = time.time()
-        calm_beach_3()
+        calm_beach_2()
         attack()
         time.sleep(random.uniform(LOOP_SLEEP_ACTIVE_MIN, LOOP_SLEEP_ACTIVE_MAX))
 
@@ -94,10 +94,12 @@ def attack_while_moving(min_interval=1):
     def _attack_worker():
         global attack_thread_active
         try:
-            pydirectinput.keyDown('q')
-            sleep_duration = random.uniform(0.9, 1)
-            time.sleep(sleep_duration)
-            pydirectinput.keyUp('q')
+            # # Ren
+            # pydirectinput.keyDown('q')
+            # sleep_duration = random.uniform(0.9, 1)
+            # time.sleep(sleep_duration)
+            # pydirectinput.keyUp('q')
+            pydirectinput.press('q', 1, 0)
         finally:
             with attack_thread_lock:
                 attack_thread_active = False
@@ -692,21 +694,20 @@ def winter_4():
         goTo(15, 72, 1)
 
 
-def calm_beach_3():
+def calm_beach_2():
     global summon
     current_time = time.time()
     timeout = 30  # seconds
     start_time = time.time()
-    if current_time - summon >= 80:
+    if current_time - summon >= 70:
         sleep_duration = random.uniform(0.4, 0.5)
         goTo(45,35,1)
         goTo(146,51,1)
         pydirectinput.press("w")
-        goTo(119,48,1)
+        goTo(102,48,1)
         pydirectinput.press("w")
-        goTo(86,48,1)
+        goTo(68,48,1)
         pydirectinput.press("w")
-        goTo(28,48,1)
         pydirectinput.keyDown('right')
         time.sleep(random.uniform(0.1, 0.2))
         pydirectinput.keyUp('right')
