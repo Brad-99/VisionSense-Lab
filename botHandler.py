@@ -157,9 +157,9 @@ def goToDirection(direction, distance):
         pydirectinput.keyDown(direction.lower())
         # pydirectinput.press(JUMP_KEY, 1, 0.05)
         pydirectinput.press(JUMP_KEY, 1, 0)
-        pydirectinput.press('c', 1, 0)
-        time.sleep(0.01)
-        attack_while_moving()
+        time.sleep(0.2)
+        pydirectinput.press(JUMP_KEY, 1, 0)
+        threading.Thread(target=attack_while_moving, daemon=True).start()
         # pydirectinput.press(TP_KEY) - Use me if you are using teleport (Kanna, Mage...)
         pydirectinput.keyUp(direction.lower())
     else:
