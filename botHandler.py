@@ -701,7 +701,7 @@ def calm_beach_2():
     start_time = time.time()
     if current_time - summon >= 70:
         sleep_duration = random.uniform(0.4, 0.5)
-        goTo(45,35,1)
+        goTo(36,35,1)
         goTo(146,51,1)
         pydirectinput.press("w")
         goTo(102,48,1)
