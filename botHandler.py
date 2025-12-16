@@ -23,7 +23,7 @@ JUMP_KEY = 'alt'
 BUFF_TIME = 33 * 1  # Seconds
 LOOP_COUNT = 1
 skill_3s=time.time()
-skill_10s=time.time()
+skill_14s=time.time()
 skill_6s=time.time()
 skill_15s=time.time()
 skill_60s=time.time()
@@ -66,8 +66,7 @@ def startBot():
         time.sleep(random.uniform(LOOP_SLEEP_ACTIVE_MIN, LOOP_SLEEP_ACTIVE_MAX))
 
 def attack():
-    # skills_10s()
-    skills_15s()
+    skills_14s()
     skills_12s()
     skills_60s()
     # feed_pet()
@@ -267,14 +266,14 @@ def jumpDown():
     time.sleep(sleep_duration)
 
 # Skills
-def skills_10s():
-    global skill_10s
+def skills_14s():
+    global skill_14s
     current_time = time.time()
-    if current_time - skill_10s >= 10:
+    if current_time - skill_14s >= 14:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
         pydirectinput.press('1', 1, 0)
-        skill_10s = time.time()
+        skill_14s = time.time()
 def skills_12s():
     global skill_6s
     current_time = time.time()
