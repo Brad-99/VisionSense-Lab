@@ -721,10 +721,10 @@ def winter_4():
 def calm_beach_2():
     global summon
     current_time = time.time()
-    timeout = 30  # seconds
+    timeout = 30  
     start_time = time.time()
     if current_time - summon >= 80:
-        sleep_duration = random.uniform(0.4, 0.5)
+        summon = time.time()  # Reset timer immediately after triggering
         goTo(36,35,1)
         goTo(146,51,1)
         pydirectinput.press("w")
