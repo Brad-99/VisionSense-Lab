@@ -45,7 +45,7 @@ def startBot():
 
     time.sleep(1)
     global summon, feed_pet_time
-    summon = time.time() - 76  # Force summon on first run
+    summon = time.time() - 81  # Force summon on first run
     # feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
     calm_beach_2()
@@ -131,6 +131,7 @@ def goTo(targetX, targetY, rangeFromCoords, isRune=False):
         while abs(yDistance) > WANTED_RANGE and handler.botThread.isRunning():  # Check the Y Axis
             if yDistance > 0:
                 goDown()
+                wait_for_descent_settle()
             else:
                 # try to go up; if goUp returns False (failed within timeout),
                 # attempt to correct X position first then retry going up
@@ -144,6 +145,8 @@ def goTo(targetX, targetY, rangeFromCoords, isRune=False):
                         currentPlayerLocation = handler.gameMonitorInstance.getPlayerCoords()
                         xDistance = targetX - currentPlayerLocation.x
                     # after X correction, continue loop which will call goUp again
+                else:
+                    wait_for_descent_settle()
             time.sleep(0.1)
             if isRune:
                 time.sleep(0.85)
@@ -232,6 +235,27 @@ def goDown():
     pydirectinput.keyUp('down')
     sleep_duration = random.uniform(0.5, 0.6)
     time.sleep(sleep_duration)
+
+def wait_for_descent_settle(max_wait=1.5, stable_checks=3, check_interval=0.12, idle_threshold=1):
+    """
+    After triggering a drop, wait until Y movement settles so we do not spam goDown.
+    """
+    start = time.time()
+    prev = handler.gameMonitorInstance.getPlayerCoords()
+    stable_count = 0
+    while time.time() - start < max_wait and handler.botThread.isRunning():
+        time.sleep(check_interval)
+        current = handler.gameMonitorInstance.getPlayerCoords()
+        if current is None or prev is None:
+            prev = current
+            continue
+        if abs(current.y - prev.y) <= idle_threshold:
+            stable_count += 1
+            if stable_count >= stable_checks:
+                break
+        else:
+            stable_count = 0
+        prev = current
 
 def jumpDown():
     sleep_duration = random.uniform(0.8, 0.9)
@@ -699,7 +723,7 @@ def calm_beach_2():
     current_time = time.time()
     timeout = 30  # seconds
     start_time = time.time()
-    if current_time - summon >= 75:
+    if current_time - summon >= 80:
         sleep_duration = random.uniform(0.4, 0.5)
         goTo(36,35,1)
         goTo(146,51,1)
