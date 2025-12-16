@@ -45,7 +45,7 @@ def startBot():
 
     time.sleep(1)
     global summon, feed_pet_time
-    summon = time.time() - 76  # Force summon on first run
+    summon = time.time() - 71  # Force summon on first run
     # feed_pet_time = time.time() - 601  # Force feed_pet on first run (10 minutes in past)
     # bottom_deck_3()  
     calm_beach_2()
@@ -723,7 +723,7 @@ def calm_beach_2():
     current_time = time.time()
     timeout = 30  
     start_time = time.time()
-    if current_time - summon >= 75:
+    if current_time - summon >= 70:
         summon = time.time()  # Reset timer immediately after triggering
         goTo(36,35,1)
         goTo(146,51,1)
