@@ -267,22 +267,22 @@ def jumpDown():
     time.sleep(sleep_duration)
 
 # Skills
-def skills_9s():
-    global skill_9s
-    current_time = time.time()
-    if current_time - skill_9s >= 9:
-        sleep_duration = random.uniform(0.29, 0.39)
-        time.sleep(sleep_duration)
-        pydirectinput.press('1', 1, 0)
-        skill_9s = time.time()
 def skills_10s():
     global skill_10s
     current_time = time.time()
     if current_time - skill_10s >= 10:
         sleep_duration = random.uniform(0.29, 0.39)
         time.sleep(sleep_duration)
-        pydirectinput.press('2', 1, 0)
+        pydirectinput.press('1', 1, 0)
         skill_10s = time.time()
+def skills_9s():
+    global skill_9s
+    current_time = time.time()
+    if current_time - skill_9s >= 9:
+        sleep_duration = random.uniform(0.29, 0.39)
+        time.sleep(sleep_duration)
+        pydirectinput.press('2', 1, 0)
+        skill_9s = time.time()
 def skills_15s():
     global skill_15s
     current_time = time.time()
@@ -723,6 +723,9 @@ def calm_beach_2():
     start_time = time.time()
     if current_time - summon >= 70:
         summon = time.time()  # Reset timer immediately after triggering
+        pydirectinput.keyDown('left')
+        time.sleep(random.uniform(0.2, 0.3))
+        pydirectinput.keyUp('left')
         goTo(36,35,1)
         goTo(146,51,1)
         pydirectinput.press("w")
