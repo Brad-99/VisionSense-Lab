@@ -31,6 +31,7 @@ skill_60s=time.time()
 skill_120s=time.time()
 feed_pet_time=time.time()
 summon=time.time()
+last_q_press=time.time()
 last_attack_while_moving = 0.0
 attack_thread_lock = threading.Lock()
 attack_thread_active = False
@@ -67,12 +68,16 @@ def startBot():
         time.sleep(random.uniform(LOOP_SLEEP_ACTIVE_MIN, LOOP_SLEEP_ACTIVE_MAX))
 
 def attack():
+    global last_q_press
     skills_9s()
     skills_10s()
     # skills_60s()
     # feed_pet()
     # skills_120s()
-    pydirectinput.press('q', 1, 0)
+    now = time.time()
+    if now - last_q_press >= 8:
+        pydirectinput.press('q', 1, 0)
+        last_q_press = now
 
 
 
