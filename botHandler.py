@@ -69,7 +69,7 @@ def startBot():
 def attack():
     skills_9s()
     skills_10s()
-    skills_60s()
+    # skills_60s()
     # feed_pet()
     # skills_120s()
     pydirectinput.press('q', 1, 0)
@@ -726,6 +726,7 @@ def calm_beach_2():
         pydirectinput.keyDown('left')
         time.sleep(random.uniform(0.2, 0.3))
         pydirectinput.keyUp('left')
+        pydirectinput.press('3', 1, 0)
         goTo(36,35,1)
         goTo(146,51,1)
         pydirectinput.press("w")
