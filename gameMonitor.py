@@ -16,8 +16,9 @@ runeIcon = Image.open(BASE_DIR / 'pics' / 'runeIcon.png')
 ICON_CHECK_INTERVAL_SECONDS = 1.0
 DOOR_NOTIFY_COOLDOWN_SECONDS = 90
 RUNE_NOTIFY_COOLDOWN_SECONDS = 90
-ICON_MATCH_TOLERANCE = 40  # Max per-channel difference allowed when matching icons
-ICON_MATCH_MEAN_TOLERANCE = 20  # Max average per-channel difference allowed
+ICON_MATCH_TOLERANCE = 18  # Max per-channel difference allowed when matching icons
+ICON_MATCH_MEAN_TOLERANCE = 7  # Max average per-channel difference allowed
+ICON_ALPHA_THRESHOLD = 10  # Ignore fully transparent pixels below this alpha
 DISCORD_WEBHOOK_URL = os.environ.get(
     "DISCORD_WEBHOOK_URL",
     "https://canary.discord.com/api/webhooks/1451374880582008883/01h659Z2IyemSoRuMTXl0ZWD5bg7NE9vYZUZ2tiwJX8I8naz2IPHDM_KmlT5a9aTa3Ad",
@@ -94,8 +95,11 @@ def findCoordsOnMiniMap(innerIcon, tolerance=0, mean_tolerance=None):
     miniMapImage = screenManager.getMiniMapScreenshot()
     if miniMapImage is None:
         return None
-    if miniMapImage.mode != innerIcon.mode:
-        innerIcon = innerIcon.convert(miniMapImage.mode)
+    # Ensure both are RGBA so we can mask by alpha when present
+    if miniMapImage.mode != "RGBA":
+        miniMapImage = miniMapImage.convert("RGBA")
+    if innerIcon.mode != "RGBA":
+        innerIcon = innerIcon.convert("RGBA")
     innerIconArr = numpy.asarray(innerIcon).astype(numpy.int16)
     miniMapArr = numpy.asarray(miniMapImage).astype(numpy.int16)
 
@@ -117,9 +121,18 @@ def findCoordsOnMiniMap(innerIcon, tolerance=0, mean_tolerance=None):
                 if pic.shape != innerIconArr.shape:
                     continue
                 diff = numpy.abs(pic - innerIconArr)
-                if (diff <= tolerance).all():
-                    return utils.Point(x, y)
-                if mean_tolerance is not None and diff.mean() <= mean_tolerance:
+                # Apply alpha mask if available to avoid matching transparent padding
+                alpha = innerIconArr[:, :, 3]
+                if alpha is not None:
+                    mask = alpha > ICON_ALPHA_THRESHOLD
+                    if not mask.any():
+                        continue
+                    diff_rgb = diff[:, :, :3][mask]
+                else:
+                    diff_rgb = diff[:, :, :3].reshape(-1, 3)
+                max_diff = diff_rgb.max()
+                mean_diff = diff_rgb.mean()
+                if max_diff <= tolerance and mean_diff <= (mean_tolerance or tolerance):
                     return utils.Point(x, y)
     return None
 
