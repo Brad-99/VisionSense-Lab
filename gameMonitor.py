@@ -16,6 +16,8 @@ runeIcon = Image.open(BASE_DIR / 'pics' / 'runeIcon.png')
 ICON_CHECK_INTERVAL_SECONDS = 1.0
 DOOR_NOTIFY_COOLDOWN_SECONDS = 90
 RUNE_NOTIFY_COOLDOWN_SECONDS = 90
+ICON_MATCH_TOLERANCE = 25  # Max per-channel difference allowed when matching icons
+ICON_MATCH_MEAN_TOLERANCE = 12  # Max average per-channel difference allowed
 DISCORD_WEBHOOK_URL = os.environ.get(
     "DISCORD_WEBHOOK_URL",
     "https://canary.discord.com/api/webhooks/1451374880582008883/01h659Z2IyemSoRuMTXl0ZWD5bg7NE9vYZUZ2tiwJX8I8naz2IPHDM_KmlT5a9aTa3Ad",
@@ -72,7 +74,11 @@ class GameMonitor:
             return
 
         setattr(self, last_check_attr, now)
-        coords = findCoordsOnMiniMap(icon)
+        coords = findCoordsOnMiniMap(
+            icon,
+            tolerance=ICON_MATCH_TOLERANCE,
+            mean_tolerance=ICON_MATCH_MEAN_TOLERANCE,
+        )
         if coords is None:
             return
 
@@ -84,14 +90,14 @@ class GameMonitor:
         message = f"{label} detected on minimap at ({coords.x}, {coords.y})"
         send_discord_notification(message)
 
-def findCoordsOnMiniMap(innerIcon):
+def findCoordsOnMiniMap(innerIcon, tolerance=0, mean_tolerance=None):
     miniMapImage = screenManager.getMiniMapScreenshot()
     if miniMapImage is None:
         return None
     if miniMapImage.mode != innerIcon.mode:
         innerIcon = innerIcon.convert(miniMapImage.mode)
-    innerIconArr = numpy.asarray(innerIcon)
-    miniMapArr = numpy.asarray(miniMapImage)
+    innerIconArr = numpy.asarray(innerIcon).astype(numpy.int16)
+    miniMapArr = numpy.asarray(miniMapImage).astype(numpy.int16)
 
     innerIconArr_y, innerIconArr_x = innerIconArr.shape[:2]
     miniMapArr_y, miniMapArr_x = miniMapArr.shape[:2]
@@ -104,9 +110,17 @@ def findCoordsOnMiniMap(innerIcon):
             x2 = x + innerIconArr_x
             y2 = y + innerIconArr_y
             pic = miniMapArr[y:y2, x:x2]
-            test = (pic == innerIconArr)
-            if test.all():
-                return utils.Point(x, y)
+            if tolerance == 0 and mean_tolerance is None:
+                if (pic == innerIconArr).all():
+                    return utils.Point(x, y)
+            else:
+                if pic.shape != innerIconArr.shape:
+                    continue
+                diff = numpy.abs(pic - innerIconArr)
+                if (diff <= tolerance).all():
+                    return utils.Point(x, y)
+                if mean_tolerance is not None and diff.mean() <= mean_tolerance:
+                    return utils.Point(x, y)
     return None
 
 def findCoordsOfColor(target_color=(255, 239, 0), tolerance=10):
