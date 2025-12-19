@@ -16,8 +16,8 @@ runeIcon = Image.open(BASE_DIR / 'pics' / 'runeIcon.png')
 ICON_CHECK_INTERVAL_SECONDS = 1.0
 DOOR_NOTIFY_COOLDOWN_SECONDS = 90
 RUNE_NOTIFY_COOLDOWN_SECONDS = 90
-ICON_MATCH_TOLERANCE = 10  # Max per-channel difference allowed when matching icons
-ICON_MATCH_MEAN_TOLERANCE = 4  # Max average per-channel difference allowed
+ICON_MATCH_TOLERANCE = 0  # Require exact per-channel match
+ICON_MATCH_MEAN_TOLERANCE = None  # Disable mean-based matching
 ICON_ALPHA_THRESHOLD = 10  # Ignore fully transparent pixels below this alpha
 DISCORD_WEBHOOK_URL = os.environ.get(
     "DISCORD_WEBHOOK_URL",
