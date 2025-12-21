@@ -16,9 +16,6 @@ runeIcon = Image.open(BASE_DIR / 'pics' / 'runeIcon.png')
 ICON_CHECK_INTERVAL_SECONDS = 1.0
 DOOR_NOTIFY_COOLDOWN_SECONDS = 90
 RUNE_NOTIFY_COOLDOWN_SECONDS = 90
-ICON_MATCH_TOLERANCE = 24  # Allow modest per-channel differences
-ICON_MATCH_MEAN_TOLERANCE = 10  # Allow small average difference across channels
-ICON_ALPHA_THRESHOLD = 10  # Ignore fully transparent pixels below this alpha
 DISCORD_WEBHOOK_URL = os.environ.get(
     "DISCORD_WEBHOOK_URL",
     "https://canary.discord.com/api/webhooks/1451374880582008883/01h659Z2IyemSoRuMTXl0ZWD5bg7NE9vYZUZ2tiwJX8I8naz2IPHDM_KmlT5a9aTa3Ad",
@@ -75,11 +72,7 @@ class GameMonitor:
             return
 
         setattr(self, last_check_attr, now)
-        coords = findCoordsOnMiniMap(
-            icon,
-            tolerance=ICON_MATCH_TOLERANCE,
-            mean_tolerance=ICON_MATCH_MEAN_TOLERANCE,
-        )
+        coords = findCoordsOnMiniMap(icon)
         if coords is None:
             return
 
@@ -91,17 +84,14 @@ class GameMonitor:
         message = f"{label} detected on minimap at ({coords.x}, {coords.y})"
         send_discord_notification(message)
 
-def findCoordsOnMiniMap(innerIcon, tolerance=0, mean_tolerance=None):
+def findCoordsOnMiniMap(innerIcon):
     miniMapImage = screenManager.getMiniMapScreenshot()
     if miniMapImage is None:
         return None
-    # Ensure both are RGBA so we can mask by alpha when present
-    if miniMapImage.mode != "RGBA":
-        miniMapImage = miniMapImage.convert("RGBA")
-    if innerIcon.mode != "RGBA":
-        innerIcon = innerIcon.convert("RGBA")
-    innerIconArr = numpy.asarray(innerIcon).astype(numpy.int16)
-    miniMapArr = numpy.asarray(miniMapImage).astype(numpy.int16)
+    if miniMapImage.mode != innerIcon.mode:
+        innerIcon = innerIcon.convert(miniMapImage.mode)
+    innerIconArr = numpy.asarray(innerIcon)
+    miniMapArr = numpy.asarray(miniMapImage)
 
     innerIconArr_y, innerIconArr_x = innerIconArr.shape[:2]
     miniMapArr_y, miniMapArr_x = miniMapArr.shape[:2]
@@ -114,26 +104,9 @@ def findCoordsOnMiniMap(innerIcon, tolerance=0, mean_tolerance=None):
             x2 = x + innerIconArr_x
             y2 = y + innerIconArr_y
             pic = miniMapArr[y:y2, x:x2]
-            if tolerance == 0 and mean_tolerance is None:
-                if (pic == innerIconArr).all():
-                    return utils.Point(x, y)
-            else:
-                if pic.shape != innerIconArr.shape:
-                    continue
-                diff = numpy.abs(pic - innerIconArr)
-                # Apply alpha mask if available to avoid matching transparent padding
-                alpha = innerIconArr[:, :, 3]
-                if alpha is not None:
-                    mask = alpha > ICON_ALPHA_THRESHOLD
-                    if not mask.any():
-                        continue
-                    diff_rgb = diff[:, :, :3][mask]
-                else:
-                    diff_rgb = diff[:, :, :3].reshape(-1, 3)
-                max_diff = diff_rgb.max()
-                mean_diff = diff_rgb.mean()
-                if max_diff <= tolerance and mean_diff <= (mean_tolerance or tolerance):
-                    return utils.Point(x, y)
+            test = (pic == innerIconArr)
+            if test.all():
+                return utils.Point(x, y)
     return None
 
 def findCoordsOfColor(target_color=(255, 239, 0), tolerance=10):
